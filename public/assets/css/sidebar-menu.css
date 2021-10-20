@@ -43,14 +43,14 @@
 	padding: 13px 5px 13px 15px;
 	display: block;
 	border-left: 3px solid transparent;
-	color: rgba(255, 255, 255, 0.65);
+	color: var(--hurufmuted);
 	font-size: 15px;
 }
 .sidebar-menu>li>a>.fa {
 	width: 20px;
 }
 .sidebar-menu>li:hover>a, .sidebar-menu>li.active>a {
-	color: #ffffff;
+	color: var(--huruf);
     background: rgba(255, 255, 255, 0.15);
     border-left-color: #ffffff;
 }
@@ -61,7 +61,7 @@
 .sidebar-menu li.sidebar-header {
 	padding: 10px 25px 10px 15px;
 	font-size: 12px;
-	color: rgba(255, 255, 255, 0.5);
+	color: var(--hurufmuted);
 }
 .sidebar-menu li>a>.fa-angle-left {
 	/* width: auto;
@@ -79,7 +79,7 @@
 	display: block;
 }
 .sidebar-menu a {
-	color: #b8c7ce;
+	color: var(--hurufmuted);
 	text-decoration: none;
 }
 .sidebar-menu .sidebar-submenu {
@@ -96,7 +96,7 @@
 	padding: 5px 5px 5px 15px;
 	display: block;
 	font-size: 14px;
-	color: rgba(255, 255, 255, 0.65);
+	color: var(--hurufmuted);
 }
 .sidebar-menu .sidebar-submenu>li>a>.fa {
 	width: 20px;
@@ -106,7 +106,7 @@
 	width: auto;
 }
 .sidebar-menu .sidebar-submenu>li.active>a, .sidebar-menu .sidebar-submenu>li>a:hover {
-	color: #ffffff;
+	color: var(--huruf);
 }
 .sidebar-menu-rtl {
 	list-style: none;
@@ -123,13 +123,13 @@
 	padding: 12px 15px 12px 5px;
 	display: block;
 	border-left: 3px solid transparent;
-	color: #b8c7ce;
+	color: var(--hurufmuted);
 }
 .sidebar-menu-rtl>li>a>.fa {
 	width: 20px;
 }
 .sidebar-menu-rtl>li:hover>a, .sidebar-menu-rtl>li.active>a {
-	color: #fff;
+	color: var(--huruf);
 	background: #1e282c;
 	border-left-color: #3c8dbc;
 }
@@ -140,7 +140,7 @@
 .sidebar-menu-rtl li.sidebar-header {
 	padding: 10px 15px 10px 25px;
 	font-size: 12px;
-	color: #4b646f;
+	color: var(--hurufmuted);
 	background: #1a2226;
 }
 .sidebar-menu-rtl li>a>.fa-angle-left {
@@ -157,7 +157,7 @@
 	display: block;
 }
 .sidebar-menu-rtl a {
-	color: #b8c7ce;
+	color: var(--hurufmuted);
 	text-decoration: none;
 }
 .sidebar-menu-rtl .sidebar-submenu {
@@ -174,7 +174,7 @@
 	padding: 5px 15px 5px 5px;
 	display: block;
 	font-size: 14px;
-	color: #8aa4af;
+	color: var(--hurufmuted);
 }
 .sidebar-menu-rtl .sidebar-submenu>li>a>.fa {
 	width: 20px;
@@ -183,5 +183,5 @@
 	width: auto;
 }
 .sidebar-menu-rtl .sidebar-submenu>li.active>a, .sidebar-menu-rtl .sidebar-submenu>li>a:hover {
-	color: #fff;
+	color: var(--huruf);
 }

@@ -98,7 +98,7 @@
     </li>
     <li class="Report">
       <a href="{{route('chat')}}" class="waves-effect">
-        <i class="zmdi zmdi-card-travel"></i>
+        <i class="zmdi zmdi-comment"></i>
         <span>Chat</span>
       </a>
     </li>
