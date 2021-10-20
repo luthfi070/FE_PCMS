@@ -13,7 +13,7 @@
   @stack('css')
 </head>
 
-<body class="bg-theme bg-theme1">
+<body class="bg-theme bg-theme0">
 
   {{-- <!-- start loader -->
   <div id="pageloader-overlay" class="visible incoming">
@@ -52,7 +52,7 @@
     <!--End footer-->
 
     <!--start color switcher-->
-    @include('sidebar-filter')
+    {{-- @include('sidebar-filter') --}}
     <!--end color cwitcher-->
 
   </div>
@@ -61,6 +61,7 @@
 
   <!-- Bootstrap core JavaScript-->
   @include('script')
+  @stack('js')
 </body>
 </html>
 

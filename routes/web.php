@@ -151,9 +151,9 @@ Route::get('/setting', function () {
     return view('setting');
 });
 
-Route::get('/chat/{room_id}', function ($room_id) {
-    return view('chat/chat',['room_id'=>$room_id]);
-});
+Route::get('/chat', function () {
+    return view('chat/chat');
+})->name('chat');
 
 Route::group(array('prefix' => '', 'as' => 'MobilizationDate'), function () {
     Route::get('/getMobilizationDate', ['as' => 'getMobilizationDate', 'uses' => 'MobilizationDateController@getMobilizationDate']);

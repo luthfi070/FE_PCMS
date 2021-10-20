@@ -97,14 +97,10 @@
       </ul>
     </li>
     <li class="Report">
-      <a href="javaScript:void();" class="waves-effect">
+      <a href="{{route('chat')}}" class="waves-effect">
         <i class="zmdi zmdi-card-travel"></i>
         <span>Chat</span>
-        <i class="fa fa-angle-left pull-right"></i>
       </a>
-      <ul class="sidebar-submenu">
-        <li id="Report1"><a href="/progress-report"><i class="zmdi zmdi-long-arrow-right"></i> Progress Report</a></li>
-      </ul>
     </li>
   </ul>
 
