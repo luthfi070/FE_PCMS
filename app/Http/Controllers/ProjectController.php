@@ -233,8 +233,8 @@ class ProjectController extends Controller
         $sendData['ContractAmount'] = $ContractAmount;
 
         $sendData['Length'] = 0;
-        $sendData['CommencementDate'] = ""; //$StartConsultant;
-        $sendData['CompletionDate'] = ""; //$EndConsultant;
+        $sendData['CommencementDate'] =  null; //$StartConsultant;
+        $sendData['CompletionDate'] =  null; //$EndConsultant;
         $sendData['ProjectDuration'] = (strtotime($EndConsultant) - strtotime($StartConsultant)) / 84600;
         $sendData['CurrencyType'] = $CurrencyType;
         $responseBodyProject = $this->insertData($url, $sendData);
@@ -399,6 +399,7 @@ class ProjectController extends Controller
         $responseBody = $this->getData($url);
         $project = json_decode($responseBody, true);
         session()->put('ProjectID', $project['ProjectID']);
+        session()->put('ProjectName', $project['ProjectName']);
     }
 
     public function getProjectOwner()

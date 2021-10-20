@@ -14,6 +14,7 @@
 <link href="{{url('assets/css/app-style.css')}}" rel="stylesheet" />
 <link href="{{url('assets/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
 <link href="{{url('assets/plugins/bootstrap-datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{url('assets/font-awesome/all.min.css')}}" rel="stylesheet" type="text/css">
 <!-- notifications css -->
 <link rel="stylesheet" href="{{url('assets/plugins/notifications/css/lobibox.min.css')}}" />
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />

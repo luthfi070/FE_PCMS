@@ -10,7 +10,7 @@ class WeatherInfoController extends Controller
     public function index()
     {
         $client = new Client();
-        $response = $client->request('GET', env('API_URL').'/DataWeather',['verify' => false]);
+        $response = $client->request('GET', config('global.api_url').'/api/DataWeather',['verify' => false]);
         $weathers = json_decode($response->getBody());
 
         return view('weather_info/weather-info',compact('weathers'));
@@ -18,7 +18,7 @@ class WeatherInfoController extends Controller
     public function getData()
     {
         $client = new Client();
-        $response = $client->request('GET', env('API_URL').'/weatherInfo',['verify' => true]);
+        $response = $client->request('GET', config('global.api_url').'/api/weatherInfo',['verify' => true]);
         $responseBody = json_decode($response->getBody());
 
         return datatables($responseBody)
@@ -39,7 +39,7 @@ class WeatherInfoController extends Controller
     public function postData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('post', env('API_URL').'/weatherInfo', ['form_params' => $request->post('inp')]);
+        $response = $client->request('post', config('global.api_url').'/api/weatherInfo', ['form_params' => $request->post('inp')]);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -48,7 +48,7 @@ class WeatherInfoController extends Controller
     public function updateData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('post', env('API_URL').'/weatherInfo/'.$request->id, ['form_params' => $request->all()]);
+        $response = $client->request('post', config('global.api_url').'/api/weatherInfo/'.$request->id, ['form_params' => $request->all()]);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -57,7 +57,7 @@ class WeatherInfoController extends Controller
     public function findData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('get', env('API_URL').'/weatherInfo/'.$request->id);
+        $response = $client->request('get', config('global.api_url').'/api/weatherInfo/'.$request->id);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -66,7 +66,7 @@ class WeatherInfoController extends Controller
     public function deleteData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('delete', env('API_URL').'/weatherInfo/'.$request->id);
+        $response = $client->request('delete', config('global.api_url').'/api/weatherInfo/'.$request->id);
         $responseBody = $response->getBody();
 
         return $responseBody;    }

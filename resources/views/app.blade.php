@@ -10,6 +10,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}" />
   <title>PCMS - - Project Cost Management System</title>
   @include('style')  
+  @stack('css')
 </head>
 
 <body class="bg-theme bg-theme1">

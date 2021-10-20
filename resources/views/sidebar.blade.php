@@ -21,6 +21,7 @@
     </div>
   </div>
   <ul class="sidebar-menu do-nicescrol">
+    <li class="sidebar-header">Project: {{session('ProjectName')}} ({{session('ProjectID')}})</li>
     <li class="sidebar-header">MAIN NAVIGATION</li>
     <li class="Planning">
       <a href="javaScript:void();" class="waves-effect">
@@ -93,6 +94,16 @@
             <li id="Master12"><a href="/units"><i class="zmdi zmdi-long-arrow-right"></i> Units</a>
           </ul>
         </li>
+      </ul>
+    </li>
+    <li class="Report">
+      <a href="javaScript:void();" class="waves-effect">
+        <i class="zmdi zmdi-card-travel"></i>
+        <span>Chat</span>
+        <i class="fa fa-angle-left pull-right"></i>
+      </a>
+      <ul class="sidebar-submenu">
+        <li id="Report1"><a href="/progress-report"><i class="zmdi zmdi-long-arrow-right"></i> Progress Report</a></li>
       </ul>
     </li>
   </ul>

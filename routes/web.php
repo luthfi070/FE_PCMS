@@ -151,6 +151,10 @@ Route::get('/setting', function () {
     return view('setting');
 });
 
+Route::get('/chat/{room_id}', function ($room_id) {
+    return view('chat/chat',['room_id'=>$room_id]);
+});
+
 Route::group(array('prefix' => '', 'as' => 'MobilizationDate'), function () {
     Route::get('/getMobilizationDate', ['as' => 'getMobilizationDate', 'uses' => 'MobilizationDateController@getMobilizationDate']);
     Route::get('/getMobilizationDateByBusinessPartner', ['as' => 'getMobilizationDateByBusinessPartner', 'uses' => 'MobilizationDateController@getMobilizationDateByBusinessPartner']);

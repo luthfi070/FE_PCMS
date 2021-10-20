@@ -114,7 +114,7 @@
                         <div class="form-group float-right">
 
                             <button type="button" class="btn btn-success px-5" id="btn-submit-add"><i class="fa fa-save"></i> Save</button>
-                            <button type="reset" class="btn btn-danger px-5"><i class="fa fa-times"></i> Cancel</button>
+                            <button type="reset" class="btn btn-danger px-5" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i> Cancel</button>
 
                         </div>
                     </form>
@@ -200,7 +200,7 @@
                         <div class="form-group float-right">
 
                             <button type="submit" class="btn btn-success px-5" id="btn-submit-Edit"><i class="fa fa-save"></i> Save</button>
-                            <button type="reset" class="btn btn-danger px-5"><i class="fa fa-times"></i> Cancel</button>
+                            <button type="reset" class="btn btn-danger px-5" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i> Cancel</button>
 
                         </div>
                     </form>
