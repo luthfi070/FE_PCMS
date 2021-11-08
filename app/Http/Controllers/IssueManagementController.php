@@ -10,7 +10,7 @@ class IssueManagementController extends Controller
     public function getData()
     {
         $client = new Client();
-        $response = $client->request('GET', env('API_URL').'/issue',['verify' => false]);
+        $response = $client->request('GET', config('global.api_url').'/api/issue',['verify' => false]);
         $responseBody = json_decode($response->getBody());
 
         return datatables($responseBody)
@@ -26,7 +26,7 @@ class IssueManagementController extends Controller
     public function postData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('post', env('API_URL').'/issue', ['form_params' => $request->post('inp')]);
+        $response = $client->request('post', config('global.api_url').'/api/issue', ['form_params' => $request->post('inp')]);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -35,7 +35,7 @@ class IssueManagementController extends Controller
     public function updateData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('post', env('API_URL').'/issue/'.$request->id, ['form_params' => $request->all()]);
+        $response = $client->request('post', config('global.api_url').'/api/issue/'.$request->id, ['form_params' => $request->all()]);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -44,7 +44,7 @@ class IssueManagementController extends Controller
     public function findData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('get', env('API_URL').'/issue/'.$request->id);
+        $response = $client->request('get', config('global.api_url').'/api/issue/'.$request->id);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -53,7 +53,7 @@ class IssueManagementController extends Controller
     public function deleteData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('delete', env('API_URL').'/issue/'.$request->id);
+        $response = $client->request('delete', config('global.api_url').'/api/issue/'.$request->id);
         $responseBody = $response->getBody();
 
         return $responseBody;

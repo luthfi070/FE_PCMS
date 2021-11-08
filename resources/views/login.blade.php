@@ -24,16 +24,16 @@
 
 </head>
 
-<body class="bg-theme bg-theme1">
+<body class="bg-theme bg-theme0">
 
     <!-- start loader -->
-    <div id="pageloader-overlay" class="visible incoming">
+    {{-- <div id="pageloader-overlay" class="visible incoming">
         <div class="loader-wrapper-outer">
             <div class="loader-wrapper-inner">
                 <div class="loader"></div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- end loader -->
 
     <!-- Start wrapper-->
@@ -99,7 +99,7 @@
         <!--End Back To Top Button-->
 
         <!--start color switcher-->
-        <div class="right-sidebar">
+        {{-- <div class="right-sidebar">
             <div class="switcher-icon">
                 <i class="zmdi zmdi-settings zmdi-hc-spin"></i>
             </div>
@@ -130,7 +130,7 @@
                 </ul>
 
             </div>
-        </div>
+        </div> --}}
         <!--end color cwitcher-->
 
     </div>
@@ -187,6 +187,8 @@
 
             submitHandler: function(form) {
                 if(status==1) {
+                    $('#btn-signin-show').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>');
+                    $('#btn-signin-show').prop("disabled", true);
                     $.ajax({
                         type: "POST",
                         url: '/auth',
@@ -195,9 +197,13 @@
                     }).done(function(msg) {
                         if (msg.status == '404') {
                             loginAlert();
+                            $('#btn-signin-show').html('Sign In');
+                            $('#btn-signin-show').prop("disabled", false);
                         } else {
                             if (msg == null || msg == "") {
                                 loginAlert();
+                                $('#btn-signin-show').html('Sign In');
+                                $('#btn-signin-show').prop("disabled", false);
                             } else {
                                 window.location = "/login";
                             }
@@ -205,10 +211,14 @@
 
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         loginAlert();
+                        $('#btn-signin-show').html('Sign In');
+                        $('#btn-signin-show').prop("disabled", false);
                     });
                 }
 
                 else if(status==0) {
+                    $('#btn-signin-guest-show').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span>');
+                    $('#btn-signin-guest-show').prop("disabled", true);
                     $.ajax({
                         type: "POST",
                         url: '/authGuest',
@@ -217,9 +227,13 @@
                     }).done(function(msg) {
                         if (msg.status == '404') {
                             loginAlert();
+                            $('#btn-signin-guest-show').html('Guest');
+                            $('#btn-signin-guest-show').prop("disabled", false);
                         } else {
                             if (msg == null || msg == "") {
                                 loginAlert();
+                                $('#btn-signin-guest-show').html('Guest');
+                                $('#btn-signin-guest-show').prop("disabled", false);
                             } else {
                                 window.location = "/login";
                             }
@@ -227,6 +241,8 @@
 
                     }).fail(function(jqXHR, textStatus, errorThrown) {
                         loginAlert();
+                        $('#btn-signin-guest-show').html('Guest');
+                        $('#btn-signin-guest-show').prop("disabled", false);
                     });
                 }
             }

@@ -17,13 +17,30 @@
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Project Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="ProjectName" name="ProjectName" placeholder="Enter Your Project Name">
+                            <input type="text" class="form-control" id="ProjectName" name="ProjectName"
+                                placeholder="Enter Your Project Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="input-22" class="col-sm-2 col-form-label">Project Description</label>
                         <div class="col-sm-10">
-                            <textarea placeholder="Enter Your Project Description" class="form-control" id="ProjectDesc" name="ProjectDesc"></textarea>
+                            <textarea placeholder="Enter Your Project Description" class="form-control" id="ProjectDesc"
+                                name="ProjectDesc"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="input-23" class="col-sm-2 col-form-label">Project Location</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="regency" name="regency">
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="district" name="district">
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="village" name="village">
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -46,11 +63,12 @@
                             <div class="row">
                                 <div class="col-sm-2">
                                     <select class="form-control" id="CurrencyType" name="CurrencyType">
-                                    
+
                                     </select>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="ContractAmount" name="ContractAmount" placeholder="Enter Project Amount">
+                                    <input type="number" class="form-control" id="ContractAmount" name="ContractAmount"
+                                        placeholder="Enter Project Amount">
                                 </div>
                             </div>
                         </div>
@@ -101,13 +119,15 @@
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Contract Number</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="ContractNumberConsultant" name="ContractNumberConsultant" placeholder="Enter Your Business Name">
+                            <input type="number" class="form-control" id="ContractNumberConsultant"
+                                name="ContractNumberConsultant" placeholder="Enter Your Business Name">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Consultant</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" style="width:100%" id="Consultant" name="Consultant">
+                            <select class="js-example-basic-single" style="width:100%" id="Consultant"
+                                name="Consultant">
                                 <option></option>
                             </select>
                         </div>
@@ -115,7 +135,8 @@
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Project Manager</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" style="width:100%" id="ProjectManagerConsultant" name="ProjectManagerConsultant">
+                            <select class="js-example-basic-single" style="width:100%" id="ProjectManagerConsultant"
+                                name="ProjectManagerConsultant">
                                 <option></option>
                             </select>
                         </div>
@@ -123,7 +144,8 @@
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Position</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" style="width:100%" id="PositionConsultant" name="PositionConsultant">
+                            <select class="js-example-basic-single" style="width:100%" id="PositionConsultant"
+                                name="PositionConsultant">
                                 <option></option>
                             </select>
                         </div>
@@ -131,19 +153,22 @@
                     <div class="form-group row">
                         <label for="input-22" class="col-sm-2 col-form-label">Scope Of Work</label>
                         <div class="col-sm-10">
-                            <textarea placeholder="Enter Your Project Description" class="form-control" id="ScopeOfWorkConsultant" name="ScopeOfWorkConsultant"></textarea>
+                            <textarea placeholder="Enter Your Project Description" class="form-control"
+                                id="ScopeOfWorkConsultant" name="ScopeOfWorkConsultant"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Start</label>
                         <div class="col-sm-10">
-                            <input type="Date" class="form-control" id="StartConsultant" name="StartConsultant" placeholder="Enter Your Start">
+                            <input type="Date" class="form-control" id="StartConsultant" name="StartConsultant"
+                                placeholder="Enter Your Start">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">End</label>
                         <div class="col-sm-10">
-                            <input type="Date" class="form-control" id="EndConsultant" name="EndConsultant" placeholder="Enter Your Address">
+                            <input type="Date" class="form-control" id="EndConsultant" name="EndConsultant"
+                                placeholder="Enter Your Address">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -152,11 +177,12 @@
                             <div class="row">
                                 <div class="col-sm-2">
                                     <select class="form-control" id="ContractCurrencyConsultant">
-                                        
+
                                     </select>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="ContractAmountConsultant" name="ContractAmountConsultant" placeholder="Enter Project Amount">
+                                    <input type="number" class="form-control" id="ContractAmountConsultant"
+                                        name="ContractAmountConsultant" placeholder="Enter Project Amount">
                                 </div>
                             </div>
                         </div>
@@ -164,8 +190,10 @@
 
                 </form>
                 <div class="form-group float-right">
-                    <button class="btn btn-success px-5" type="button" id="btn_submit_consultant"><i class="fa fa-save"></i> Save</button>
-                    <button type="reset" class="btn btn-danger px-5" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i> Cancel</button>
+                    <button class="btn btn-success px-5" type="button" id="btn_submit_consultant"><i
+                            class="fa fa-save"></i> Save</button>
+                    <button type="reset" class="btn btn-danger px-5" data-dismiss="modal" aria-label="Close"><i
+                            class="fa fa-times"></i> Cancel</button>
                 </div>
             </div>
 
@@ -213,8 +241,11 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body text-center">
-                <button type="button" class="btn btn-primary  waves-effect waves-light m-1" id="btn-submit-add"><i class="fa fa-save"></i> Save Project</button>
-                <button type="button" class="btn btn-danger  waves-effect waves-light m-1"><i class="fa fa-times"></i> Cancel</button>
+                <button type="button" class="btn btn-primary  waves-effect waves-light m-1" id="btn-submit-add"><i
+                        class="fa fa-save"></i> Save Project</button>
+                        
+                        <a href="/project" class="btn btn-danger  waves-effect waves-light m-1"><i class="fa fa-times"></i> Cancel</a>
+
             </div>
         </div>
     </div>
@@ -234,13 +265,15 @@
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Contract Number</label>
                         <div class="col-sm-10">
-                            <input type="number" class="form-control" id="ContractNumberContractor" name="ContractNumberContractor" placeholder="Enter Your Contract Number">
+                            <input type="number" class="form-control" id="ContractNumberContractor"
+                                name="ContractNumberContractor" placeholder="Enter Your Contract Number">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Contractor</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" style="width:100%" id="Contractor" name="Contractor">
+                            <select class="js-example-basic-single" style="width:100%" id="Contractor"
+                                name="Contractor">
                                 <option></option>
                             </select>
                         </div>
@@ -248,7 +281,8 @@
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Project Manager</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" style="width:100%" id="ProjectManagerContractor" name="ProjectManagerContractor">
+                            <select class="js-example-basic-single" style="width:100%" id="ProjectManagerContractor"
+                                name="ProjectManagerContractor">
                                 <option></option>
                             </select>
                         </div>
@@ -256,7 +290,8 @@
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Position</label>
                         <div class="col-sm-10">
-                            <select class="js-example-basic-single" style="width:100%" id="PositionContractor" name="PositionContractor">
+                            <select class="js-example-basic-single" style="width:100%" id="PositionContractor"
+                                name="PositionContractor">
                                 <option></option>
                             </select>
                         </div>
@@ -264,19 +299,22 @@
                     <div class="form-group row">
                         <label for="input-22" class="col-sm-2 col-form-label">Scope Of Work</label>
                         <div class="col-sm-10">
-                            <textarea placeholder="Enter Your Scope Of Work" class="form-control" id="ScopeOfWorkContractor" name="ScopeOfWorkContractor"></textarea>
+                            <textarea placeholder="Enter Your Scope Of Work" class="form-control"
+                                id="ScopeOfWorkContractor" name="ScopeOfWorkContractor"></textarea>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">Start</label>
                         <div class="col-sm-10">
-                            <input type="Date" class="form-control" id="StartContractor" name="StartContractor" placeholder="Enter Your Start">
+                            <input type="Date" class="form-control" id="StartContractor" name="StartContractor"
+                                placeholder="Enter Your Start">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="input-21" class="col-sm-2 col-form-label">End</label>
                         <div class="col-sm-10">
-                            <input type="Date" class="form-control" id="EndContractor" name="EndContractor" placeholder="Enter Your End">
+                            <input type="Date" class="form-control" id="EndContractor" name="EndContractor"
+                                placeholder="Enter Your End">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -285,11 +323,12 @@
                             <div class="row">
                                 <div class="col-sm-2">
                                     <select class="form-control" id="ContractCurrencyContractor">
-                                        
+
                                     </select>
                                 </div>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="ContractAmountContractor" name="ContractAmountContractor" placeholder="Enter Contract Amount">
+                                    <input type="number" class="form-control" id="ContractAmountContractor"
+                                        name="ContractAmountContractor" placeholder="Enter Contract Amount">
                                 </div>
                             </div>
                         </div>
@@ -297,8 +336,10 @@
 
                 </form>
                 <div class="form-group float-right">
-                    <button class="btn btn-success px-5" type="button" id="btn_submit_contractor"><i class="fa fa-save"></i> Save</button>
-                    <button type="reset" class="btn btn-danger px-5" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i> Cancel</button>
+                    <button class="btn btn-success px-5" type="button" id="btn_submit_contractor"><i
+                            class="fa fa-save"></i> Save</button>
+                    <button type="reset" class="btn btn-danger px-5" data-dismiss="modal" aria-label="Close"><i
+                            class="fa fa-times"></i> Cancel</button>
                 </div>
             </div>
 
@@ -310,7 +351,70 @@
 @endsection
 @section('script')
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
+
+        //location
+        $('#regency').select2({
+            placeholder: "Select Regency",
+            ajax: {
+                url: '/getRegency',
+                data: "",
+                processResults: function (data) {
+                    datob = JSON.parse(data);
+                    return {
+                        results: $.map(datob, function (item) {
+                            return {
+                                text: item.name,
+                                slug: item.name,
+                                id: item.id
+                            }
+                        })
+                    };
+                }
+            }
+        });
+        $('#regency').on('change', function () {
+            $('#district').select2({
+                placeholder: "Select District",
+                ajax: {
+                    url: '/getDistrict/' + $('#regency').val(),
+                    data: "",
+                    processResults: function (data) {
+                        datob = JSON.parse(data);
+                        return {
+                            results: $.map(datob, function (item) {
+                                return {
+                                    text: item.name,
+                                    slug: item.name,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                }
+            });
+        });
+        $('#district').on('change', function () {
+            $('#village').select2({
+                placeholder: "Select Village",
+                ajax: {
+                    url: '/getVillage/' + $('#district').val(),
+                    data: "",
+                    processResults: function (data) {
+                        datob = JSON.parse(data);
+                        return {
+                            results: $.map(datob, function (item) {
+                                return {
+                                    text: item.name,
+                                    slug: item.name,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                }
+            });
+        });
         //Default data table
         //$('#default-datatable').DataTable();
 
@@ -320,7 +424,7 @@
             buttons: [{
                 text: '<i class="icon-plus"></i> Add Consultant',
                 className: 'btn-primary1',
-                action: function(e, dt, button, config) {
+                action: function (e, dt, button, config) {
                     $('#formmodal').modal('toggle');
                 }
             }]
@@ -331,10 +435,10 @@
             ajax: {
                 url: '/getCurrency',
                 data: "",
-                processResults: function(data) {
+                processResults: function (data) {
                     datob = JSON.parse(data);
                     return {
-                        results: $.map(datob, function(item) {
+                        results: $.map(datob, function (item) {
                             return {
                                 text: item.CurrencyName,
                                 slug: item.CurrencyName,
@@ -351,10 +455,10 @@
             ajax: {
                 url: '/getCurrency',
                 data: "",
-                processResults: function(data) {
+                processResults: function (data) {
                     datob = JSON.parse(data);
                     return {
-                        results: $.map(datob, function(item) {
+                        results: $.map(datob, function (item) {
                             return {
                                 text: item.CurrencyName,
                                 slug: item.CurrencyName,
@@ -371,10 +475,10 @@
             ajax: {
                 url: '/getCurrency',
                 data: "",
-                processResults: function(data) {
+                processResults: function (data) {
                     datob = JSON.parse(data);
                     return {
-                        results: $.map(datob, function(item) {
+                        results: $.map(datob, function (item) {
                             return {
                                 text: item.CurrencyName,
                                 slug: item.CurrencyName,
@@ -386,29 +490,29 @@
             }
         });
 
-        $('.btn-primary1').on('click', function() {
+        $('.btn-primary1').on('click', function () {
             // var id = $(this).data("id");
             $.ajax({
                 type: "POST",
                 url: '/getLastProjectnumber',
-                
+
                 data: {
 
                     _token: "{{ csrf_token() }}",
-                    
+
                 }
-            }).done(function(msg) {
+            }).done(function (msg) {
                 console.log(msg);
-              
+
                 $('#ContractNumberConsultant').val(msg);
-                
+
             });
         });
-        
+
         var ArrayConsultant = [];
         var ArrayContractor = [];
 
-        $('#btn-submit-add').click(function(e) {
+        $('#btn-submit-add').click(function (e) {
             console.log("klik save")
             e.preventDefault;
             $.ajax({
@@ -423,23 +527,25 @@
                     ProjectDesc: $('#ProjectDesc').val(),
                     ProjectManager: $('#ProjectManagerOwner').val(),
                     ContractAmount: $('#ContractAmount').val(),
-                    CurrencyType: $('#CurrencyType').val()
+                    CurrencyType: $('#CurrencyType').val(),
+                    village_id: $('#village').val(),
+                },
+                success: function (e) {
+                    console.log(e)
+
+                    successAlert('Add', $('#ProjectName').val(), 'success');
+                    setTimeout(function () {
+                        window.location = "/project"
+                    }, 3000);
 
                 },
-                success: function(e) {
-                    console.log(e)
-                    
-                    successAlert('Add', $('#ProjectName').val(), 'success');
-                    setTimeout(function(){ window.location="/project" }, 3000);
-                
-                },
-                error: function(e) {
+                error: function (e) {
                     console.log(e)
                 },
-            }).done(function(msg) {
+            }).done(function (msg) {
                 // datob = JSON.parse(msg);
                 console.log("save" + msg)
-               
+
                 // $('#example').DataTable().ajax.reload();
                 // if (datob != 'error') {
                 //     successAlert('Add', $('#ProjectName').val(), 'success');
@@ -460,7 +566,7 @@
                 //     $('#CurrencyType').val('');
                 // }
                 // $('#formmodal').modal('toggle');
-            }).fail(function(jqXHR, textStatus, errorThrown) {
+            }).fail(function (jqXHR, textStatus, errorThrown) {
                 errorAlertServer('Response Not Found, Please Check Your Data');
             });
 
@@ -474,10 +580,10 @@
                 data: {
                     types: 'Consultant'
                 },
-                processResults: function(data) {
+                processResults: function (data) {
                     datob = JSON.parse(data);
                     return {
-                        results: $.map(datob, function(item) {
+                        results: $.map(datob, function (item) {
                             return {
                                 text: item.BussinessName,
                                 slug: item.BussinessName,
@@ -489,7 +595,7 @@
             }
         });
 
-        $('#Consultant').on('change', function() {
+        $('#Consultant').on('change', function () {
             $('#ProjectManagerConsultant').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -499,12 +605,12 @@
                         _token: "{{ csrf_token() }}",
                         id: $('#Consultant').val()
                     },
-                    processResults: function(data) {
+                    processResults: function (data) {
 
                         datob = JSON.parse(data);
-                     
+
                         return {
-                            results: $.map(datob, function(item) {
+                            results: $.map(datob, function (item) {
                                 return {
                                     text: item.PersonilName,
                                     slug: item.PersonilName,
@@ -517,7 +623,7 @@
             });
         });
 
-        $('#ProjectManagerConsultant').on('change', function() {
+        $('#ProjectManagerConsultant').on('change', function () {
             $('#PositionConsultant').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -527,13 +633,13 @@
                         _token: "{{ csrf_token() }}",
                         id: $('#ProjectManagerConsultant').val()
                     },
-                    processResults: function(data) {
+                    processResults: function (data) {
 
                         datob = JSON.parse(data);
 
                         return {
 
-                            results: $.map(datob, function(item) {
+                            results: $.map(datob, function (item) {
                                 return {
                                     text: item.PositionName,
                                     slug: item.PositionName,
@@ -555,10 +661,10 @@
                 data: {
                     types: 'Contractor'
                 },
-                processResults: function(data) {
+                processResults: function (data) {
                     datob = JSON.parse(data);
                     return {
-                        results: $.map(datob, function(item) {
+                        results: $.map(datob, function (item) {
                             return {
                                 text: item.BussinessName,
                                 slug: item.BussinessName,
@@ -570,7 +676,7 @@
             }
         });
 
-        $('#Contractor').on('change', function() {
+        $('#Contractor').on('change', function () {
             $('#ProjectManagerContractor').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -580,12 +686,12 @@
                         _token: "{{ csrf_token() }}",
                         id: $('#Contractor').val()
                     },
-                    processResults: function(data) {
+                    processResults: function (data) {
 
                         datob = JSON.parse(data);
                         console.log(datob)
                         return {
-                            results: $.map(datob, function(item) {
+                            results: $.map(datob, function (item) {
                                 return {
                                     text: item.PersonilName,
                                     slug: item.PersonilName,
@@ -598,7 +704,7 @@
             });
         });
 
-        $('#ProjectManagerContractor').on('change', function() {
+        $('#ProjectManagerContractor').on('change', function () {
             $('#PositionContractor').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -608,14 +714,14 @@
                         _token: "{{ csrf_token() }}",
                         id: $('#ProjectManagerContractor').val()
                     },
-                    processResults: function(data) {
+                    processResults: function (data) {
 
                         datob = JSON.parse(data);
                         console.log("posisi")
                         console.log(datob)
                         return {
 
-                            results: $.map(datob, function(item) {
+                            results: $.map(datob, function (item) {
                                 return {
                                     text: item.PositionName,
                                     slug: item.PositionName,
@@ -627,34 +733,34 @@
                 }
             });
         });
-        
+
         $('#ProjectOwner').select2({
-                //dropdownParent: $('#formmodalEdit'),
-                ajax: {
-                    type: 'POST',
-                    url: '/getProjectOwner',
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
-                    processResults: function(data) {
+            //dropdownParent: $('#formmodalEdit'),
+            ajax: {
+                type: 'POST',
+                url: '/getProjectOwner',
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                processResults: function (data) {
 
-                        datob = JSON.parse(data);
-                        return {
+                    datob = JSON.parse(data);
+                    return {
 
-                            results: $.map(datob, function(item) {
-                                return {
-                                    text: item.BussinessName,
-                                    slug: item.BussinessName,
-                                    id: item.id
-                                }
-                            })
-                        };
-                    }
+                        results: $.map(datob, function (item) {
+                            return {
+                                text: item.BussinessName,
+                                slug: item.BussinessName,
+                                id: item.id
+                            }
+                        })
+                    };
                 }
-            });
+            }
+        });
 
-            $('#ProjectOwner').on('change', function() {
-                $('#ProjectManagerOwner').select2({
+        $('#ProjectOwner').on('change', function () {
+            $('#ProjectManagerOwner').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
                     type: 'POST',
@@ -663,12 +769,12 @@
                         _token: "{{ csrf_token() }}",
                         id: $('#ProjectOwner').val()
                     },
-                    processResults: function(data) {
+                    processResults: function (data) {
 
                         datob = JSON.parse(data);
                         return {
 
-                            results: $.map(datob, function(item) {
+                            results: $.map(datob, function (item) {
                                 return {
                                     text: item.PersonilName,
                                     slug: item.PersonilName,
@@ -679,11 +785,11 @@
                     }
                 }
             });
-            });
+        });
 
 
 
-        $("#btn_submit_consultant").click(function() {
+        $("#btn_submit_consultant").click(function () {
             let ContractNumberConsultant = $('#ContractNumberConsultant').val()
             let Consultant = $('#Consultant').val()
             let ConsultantText = $('#Consultant').text()
@@ -713,7 +819,8 @@
                     </tr>`
             //$('#tbodyconsultan').append(row)
             var table = $('#consultant').DataTable();
-            var action = "<button type='button' class='deleteConsultant btn btn-danger waves-effect waves-light '>Delete</button>"
+            var action =
+                "<button type='button' class='deleteConsultant btn btn-danger waves-effect waves-light '>Delete</button>"
             table.row.add([
                 ConsultantText,
                 ProjectManagerConsultant,
@@ -725,12 +832,12 @@
             $('#formmodal').modal('hide')
         })
 
-        $('#consultant tbody').on("click", ".deleteConsultant", function() {
+        $('#consultant tbody').on("click", ".deleteConsultant", function () {
             console.log($(this).parent());
             table.row($(this).parents('tr')).remove().draw(false);
         });
 
-        $("#btn_submit_contractor").click(function() {
+        $("#btn_submit_contractor").click(function () {
             let ContractNumberContractor = $('#ContractNumberContractor').val()
             let Contractor = $('#Contractor').val()
             let ContractorText = $('#Contractor').text()
@@ -760,7 +867,8 @@
                     </tr>`
             //$('#tbodycontractor').append(row)
             var table = $('#contractor').DataTable();
-            var action = "<button type='button' class='deleteConsultant btn btn-danger waves-effect waves-light '>Delete</button>"
+            var action =
+                "<button type='button' class='deleteConsultant btn btn-danger waves-effect waves-light '>Delete</button>"
             table.row.add([
                 ContractorText,
                 ProjectManagerContractor,
@@ -768,7 +876,7 @@
                 EndContractor,
                 ContractAmountContractor,
                 action
-        ]).draw(false);
+            ]).draw(false);
 
             $('#ContractorForm').modal('hide')
         })
@@ -830,7 +938,7 @@
             buttons: [{
                 text: '<i class="icon-plus"></i> Add Contractor',
                 className: 'btn-primary2',
-                action: function(e, dt, button, config) {
+                action: function (e, dt, button, config) {
                     $('#ContractorForm').modal('toggle');
                 }
             }]
@@ -877,5 +985,6 @@
             .appendTo('#contractor_wrapper .col-md-6:eq(0)');
 
     });
+
 </script>
 @endsection

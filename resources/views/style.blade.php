@@ -3,7 +3,7 @@
 <!-- simplebar CSS-->
 <link href="{{url('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
 <!-- Bootstrap core CSS-->
-<link href="{{url('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+<link href="{{url('assets/css/bootstrap.css')}}" rel="stylesheet" />
 <!-- animate CSS-->
 {{-- <link href="{{url('assets/css/animate.css')}}" rel="stylesheet" type="text/css" /> --}}
 <!-- Icons CSS-->

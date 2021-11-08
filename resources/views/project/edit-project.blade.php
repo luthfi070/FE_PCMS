@@ -29,6 +29,21 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="input-23" class="col-sm-2 col-form-label">Project Location</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="regency" name="regency">
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="district" name="district">
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="village" name="village">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="input-23" class="col-sm-2 col-form-label">Project Owner</label>
                         <div class="col-sm-10">
                             <select class="form-control" id="ProjectOwnerEdit" name="ProjectOwnerEdit">
@@ -297,7 +312,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <button type="button" class="btn btn-primary  waves-effect waves-light m-1" id="btn-submit-edit"><i class="fa fa-save"></i> Save Project</button>
-                <button type="button" class="btn btn-danger  waves-effect waves-light m-1"><i class="fa fa-times"></i> Cancel</button>
+                <a href="/project" class="btn btn-danger  waves-effect waves-light m-1"><i class="fa fa-times"></i> Cancel</a>
             </div>
         </div>
     </div>
@@ -306,7 +321,71 @@
 @section('script')
 <script>
     $(document).ready(function() {
-
+        //location
+    
+        $('#regency').select2({
+            placeholder: "Select Regency",
+            ajax: {
+                url: '/getRegency',
+                data: "",
+                processResults: function (data) {
+                    datob = JSON.parse(data);
+                    return {
+                        results: $.map(datob, function (item) {
+                            return {
+                                text: item.name,
+                                slug: item.name,
+                                id: item.id,
+                            }
+                        })
+                    };
+                }
+            }
+        });
+        $('#regency').on('change', function () {
+            $('#district').select2({
+                placeholder: "Select District",
+                ajax: {
+                    url: '/getDistrict/' + $('#regency').val(),
+                    data: "",
+                    processResults: function (data) {
+                        datob = JSON.parse(data);
+                        return {
+                            results: $.map(datob, function (item) {
+                                return {
+                                    text: item.name,
+                                    slug: item.name,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                }
+            });
+        });
+        $('#district').on('change', function () {
+            $('#village').select2({
+                placeholder: "Select Village",
+                ajax: {
+                    url: '/getVillage/' + $('#district').val(),
+                    data: "",
+                    processResults: function (data) {
+                        datob = JSON.parse(data);
+                        return {
+                            results: $.map(datob, function (item) {
+                                return {
+                                    text: item.name,
+                                    slug: item.name,
+                                    id: item.id
+                                }
+                            })
+                        };
+                    }
+                }
+            });
+        });
+        
+        
         var tableConsultant = $('#consultant').DataTable({
 
     
@@ -403,26 +482,26 @@
         });
 
         $('#CurrencyTypeEdit').select2({
-        //dropdownParent: $('#formmodalEdit'),
-        ajax: {
-            url: '/getCurrency',
-            data: "",
-            processResults: function(data) {
-                datob = JSON.parse(data);
-                return {
-                    results: $.map(datob, function(item) {
-                        return {
-                            text: item.CurrencyName,
-                                slug: item.CurrencyName,
-                                id: item.id
-                        }
-                    })
-                };
+            //dropdownParent: $('#formmodalEdit'),
+            ajax: {
+                url: '/getCurrency',
+                data: "",
+                processResults: function(data) {
+                    datob = JSON.parse(data);
+                    return {
+                        results: $.map(datob, function(item) {
+                            return {
+                                text: item.CurrencyName,
+                                    slug: item.CurrencyName,
+                                    id: item.id
+                            }
+                        })
+                    };
+                }
             }
-        }
-    });
+        });
 
-    $('#ContractCurrencyContractor').select2({
+        $('#ContractCurrencyContractor').select2({
             //dropdownParent: $('#formmodalEdit'),
             ajax: {
                 url: '/getCurrency',
@@ -488,7 +567,24 @@
                 var newOption3 = new Option(datob[0].CurrencyName, datob[0].Currenctype, true, true);
                 $('#CurrencyTypeEdit').append(newOption3).trigger('change');
                 $('#ContractAmountEdit').val(datob[0].ContractAmount);
-                
+
+                // var newOption4 = new Option(datob[0].village_id.substring(0,4), datob[0].village_id.substring(0,4), true, true);
+                // $('#regency').append(newOption4).trigger('change');
+                $.ajax({
+                    type: "GET",
+                    url: '/getDataLocation/'+datob[0].village_id,
+                    data: ''
+                }).done(function(data){
+                    data = JSON.parse(data);
+                    console.log(data);
+                    var regency = new Option(data.district.regency.name, data.district.regency.id, true, true);
+                    $('#regency').append(regency).trigger('change');
+                    var district = new Option(data.district.name, data.district.id, true, true);
+                    $('#district').append(district).trigger('change');
+                    var village = new Option(data.name, data.id, true, true);
+                    $('#village').append(village).trigger('change');
+                });
+                // $('#regency').val(datob[0].village_id.substring(0,4)).trigger('change');
                 // $('#formmodaledit').window.location('/editproject');
                 
             });
@@ -899,13 +995,14 @@
                     ProjectDesc: $('#ProjectDescEdit').val(),
                     ProjectManager: $('#ProjectManagerOwnerEdit').val(),
                     ContractAmount: $('#ContractAmountEdit').val(),
-                    CurrencyType: $('#CurrencyTypeEdit').val()
+                    CurrencyType: $('#CurrencyTypeEdit').val(),
+                    village_id: $('#village').val(),
 
                 },
                 success: function(e) {
                     console.log(e)
                     
-                    successAlert('Add', $('#ProjectName').val(), 'success');
+                    successAlert('Add', $('#ProjectNameEdit').val(), 'success');
                     setTimeout(function(){ window.location="/project" }, 3000);
                 
                 },

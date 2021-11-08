@@ -158,12 +158,15 @@ class ProjectController extends Controller
         $ProjectDesc = $_POST['ProjectDesc'];
         $ProjectManager = $_POST['ProjectManager'];
         $ContractAmount = $_POST['ContractAmount'];
+        $village_id = $_POST['village_id'];
         $url = "/api/UpdateDataProject/" . $id;
         $sendData['ProjectName'] = $ProjectName;
         $sendData['ProjectOwner'] = $ProjectOwner;
         $sendData['ProjectDesc'] = $ProjectDesc;
         $sendData['ProjectManager'] = $ProjectManager;
         $sendData['ContractAmount'] = $ContractAmount;
+        $sendData['village_id'] = $village_id;
+        
         $responseBody = $this->updateData($url, $sendData);
 
         return  $responseBody;
@@ -182,6 +185,7 @@ class ProjectController extends Controller
         $ContractAmount = $_POST['ContractAmount'];
         $consultant = request('Consultant');
         $constructor = request('Constructor');
+        $village_id = $_POST['village_id'];
 
         $dataConstructor = json_decode($constructor, true);
         $dataConsultant = json_decode($consultant, true);
@@ -231,6 +235,7 @@ class ProjectController extends Controller
         $sendData['ProjectDesc'] = $ProjectDesc;
         $sendData['ProjectManager'] = $ProjectManager;
         $sendData['ContractAmount'] = $ContractAmount;
+        $sendData['village_id'] = $village_id;
 
         $sendData['Length'] = 0;
         $sendData['CommencementDate'] =  null; //$StartConsultant;

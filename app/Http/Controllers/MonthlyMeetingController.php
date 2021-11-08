@@ -10,7 +10,7 @@ class MonthlyMeetingController extends Controller
     public function getData()
     {
         $client = new Client();
-        $response = $client->request('GET', env('API_URL').'/meeting',['verify' => false]);
+        $response = $client->request('GET', config('global.api_url').'/api/meeting',['verify' => false]);
         $responseBody = json_decode($response->getBody());
 
         return datatables($responseBody)
@@ -31,7 +31,7 @@ class MonthlyMeetingController extends Controller
         $inp['file'] = chunk_split(base64_encode(file_get_contents($request->file('inp')['file'])));
 
         $client = new Client();
-        $response = $client->request('post', env('API_URL').'/meeting', ['form_params' => $inp]);
+        $response = $client->request('post', config('global.api_url').'/api/meeting', ['form_params' => $inp]);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -45,7 +45,7 @@ class MonthlyMeetingController extends Controller
         }
 
         $client = new Client();
-        $response = $client->request('post', env('API_URL').'/meeting/'.$request->id, ['form_params' => $inp]);
+        $response = $client->request('post', config('global.api_url').'/api/meeting/'.$request->id, ['form_params' => $inp]);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -54,7 +54,7 @@ class MonthlyMeetingController extends Controller
     public function findData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('get', env('API_URL').'/meeting/'.$request->id);
+        $response = $client->request('get', config('global.api_url').'/api/meeting/'.$request->id);
         $responseBody = $response->getBody();
 
         return $responseBody;
@@ -63,7 +63,7 @@ class MonthlyMeetingController extends Controller
     public function deleteData(Request $request)
     {
         $client = new Client();
-        $response = $client->request('delete', env('API_URL').'/meeting/'.$request->id);
+        $response = $client->request('delete', config('global.api_url').'/api/meeting/'.$request->id);
         $responseBody = $response->getBody();
 
         return $responseBody;    }

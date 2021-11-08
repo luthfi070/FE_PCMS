@@ -67,7 +67,7 @@ body {
     font-family: 'Mukta', sans-serif;
     font-family: 'Roboto', sans-serif;
     font-size: 15px;
-    color: rgba(255,255,255,.85);
+    color: var(--huruf);
     letter-spacing: 1px;
 }
 [tabindex="-1"]:focus {

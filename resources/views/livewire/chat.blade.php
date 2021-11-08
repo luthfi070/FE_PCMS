@@ -1,4 +1,4 @@
-<div wire:poll.keep-alive class="row">
+<div wire:poll class="row">
     <div class="col-12 my-4" style="overflow-y: scroll;">
     @forelse ($messages as $message)
        [{{$message->created_at->format('H:i')}}] {{$message->userFullName()}}: {{$message->message_text}} <br>

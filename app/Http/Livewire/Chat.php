@@ -12,7 +12,7 @@ class Chat extends Component
     public $messageText;
     public function render()
     {
-        $messages = Message::latest()->take(10)->get()->sortBy('id');
+        $messages = Message::where('project_id', session('ProjectID'))->latest()->take(10)->get()->sortBy('id');
         return view('livewire.chat', compact('messages'));
     }
 

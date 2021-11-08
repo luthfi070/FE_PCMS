@@ -4,7 +4,7 @@
     <div class="col-lg-4">
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">Chatroom: Project Tol Jababeka</h4>
+                <h4 class="text-center">Chatroom: Project {{session('ProjectName')}}</h4>
             </div>
         </div>
     </div>

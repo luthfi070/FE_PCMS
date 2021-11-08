@@ -401,9 +401,11 @@ class BaselineWbsController extends Controller
         $responseBodyWeight = json_decode($this->getData($urlWeight));
         if ($responseBodyWeight != null) {
             $AllWeight = $responseBodyWeight[0]->All_TOTAL;
+            $weight = (($childQty * $childAmount) / $AllWeight) * 100;
+        }else{
+            $weight = 100;
         }
-
-        $weight = (($childQty * $childAmount) / $AllWeight) * 100;
+            
 
 
         $url = "/api/InsertDataWbs";

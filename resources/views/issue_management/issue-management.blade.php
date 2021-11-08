@@ -237,7 +237,7 @@
                 }
             }],
             ajax: {
-                url: '{{url("getIssue")}}',
+                url: '/getIssue',
                 method: "POST",
                 type: 'json',
                 data: {
