@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
-    public function getRegency($province_id=32){
+    public function getRegency($province_id=36){
         $province = Province::find($province_id);
         $regencies = $province->regencies;
         return json_encode($regencies);
