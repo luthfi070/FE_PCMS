@@ -121,16 +121,9 @@
     }).done(function(msg) {
         var option = "<option value='0' selected>-- Select Contractor Name --</option>";
         for (var i = 0; i < msg.length; i++) {
-            if (msg[i].BussinessTypeID == 1) {
-                option += "<option value='" + msg[i].id + "'>" + msg[i].BussinessName + "</option>";
-                $('#contractor-list-hidden').val(msg[i].id);
-                break;
-            } else {
-                for (var j = 0; j < msg.length; j++) {
-                    option += "<option value='" + msg[j].id + "'>" + msg[j].BussinessName + "</option>";
-                }
-            }
-
+      
+            option += "<option value='" + msg[i].id + "'>" + msg[i].BussinessName + "</option>";
+            
         }
         $('#contractor-list').html(option);
 

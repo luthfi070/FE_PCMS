@@ -829,6 +829,7 @@
 
                             }
                         }).done(function(msg) {
+                            successAlert('Generate Pre WBS File Success');
 
                         }).fail(function(jqXHR, textStatus, errorThrown) {
                             errorAlertServer('Response Not Found, Please Check Your Data');
