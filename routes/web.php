@@ -355,7 +355,7 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::post('/getActualWbschild', ['as' => 'getActualWbschild', 'uses' => 'WbsController@getActualWbschild']);
         Route::post('/getActualWbschildHistory', ['as' => 'getActualWbschildHistory', 'uses' => 'WbsController@getActualWbschildHistory']);
         Route::post('/getActualWbsByid', ['as' => 'getActualWbsByid', 'uses' => 'WbsController@getActualWbsByid']);
-        Route::post('/generateBoq', ['as' => 'generateBoq', 'uses' => 'WbsController@generateBoq']);
+        // Route::post('/generateBoq', ['as' => 'generateBoq', 'uses' => 'WbsController@generateBoq']);
         Route::post('/updateActualWbs', ['as' => 'updateActualWbs', 'uses' => 'WbsController@updateActualWbs']);
         Route::post('/deleteActualWbs', ['as' => 'deleteActualWbs', 'uses' => 'WbsController@deleteActualWbs']);
         Route::post('/getDetailActualWbsChild', ['as' => 'getDetailActualWbsChild', 'uses' => 'WbsController@getDetailActualWbsChild']);

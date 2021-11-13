@@ -75,6 +75,8 @@ class BoqController extends Controller
         $x = 0;
         $z = 1;
         $y = 1;
+        $parentNo = 0;
+        $childNo = 1;
         $arr = array();
         for ($i = 0; $i < count($responseBody); $i++) {
             $responseBody[$i]->weight=round($responseBody[$i]->weight,2);
@@ -85,8 +87,10 @@ class BoqController extends Controller
 
             $responseBody[$i]->cost = ($responseBody[$i]->qty * $responseBody[$i]->price);
             if ($responseBody[$i]->parentItem == null) {
-                $responseBody[$i]->merge = $responseBody[$i]->no - $x;
+                $parentNo++;
+                $responseBody[$i]->merge = $parentNo;
                 $y = 1;
+                $childNo = 1;
             } else {
                 $arrx = array(
                     'id' => $responseBody[$i]->id,
@@ -95,7 +99,7 @@ class BoqController extends Controller
                 array_push($arr, $arrx);
                 $responseBody[$i]->action = '<button class="edit-btn btn btn-warning  waves-effect waves-light m-1" data-id="' . $responseBody[$i]->id . '">EDIT</button>
                 <button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1" data-ids="' . $responseBody[$i]->id . '">DELETE</button>';
-                $responseBody[$i]->merge = $responseBody[$i]->parentItem . '.' . $y;
+                $responseBody[$i]->merge = $parentNo . '.' . $childNo;
                 for ($j = 0; $j < count($arr); $j++) {
                     if ($arr[$j]['id'] == $responseBody[$i]->parentItem) {
                         $responseBody[$i]->merge = $arr[$j]['mergeBase'] . '.' . ($z);
@@ -104,6 +108,7 @@ class BoqController extends Controller
                 }
                 $y += 1;
                 $x += 1;
+                $childNo++;
             }
         }
 
@@ -423,7 +428,9 @@ class BoqController extends Controller
 
         $contractorID = $_POST['contractorID'];
         $projectID = session('ProjectID');
-        $url = "/api/getAllBoq/" . $contractorID . '/' . $projectID;
+        // $url = "/api/getAllBoq/" . $contractorID . '/' . $projectID;
+        $url = "/api/getAllBoqParent/" . $contractorID . '/' . $projectID;
+
         $responseBody = json_decode($this->getData($url));
         $x = count($responseBody);
         for ($i = 0; $i < (int)$x; $i++) {
@@ -456,7 +463,9 @@ class BoqController extends Controller
             $sendData['Created_By'] = session('UserID');
             $sendData['level'] = $level;
             $sendData['parentlevel'] = $parentLevel;
-            $this->insertData($url, $sendData);
+            $id_boq_history = $this->insertData($url, $sendData);
+            $id_boq_history = json_decode($id_boq_history);
+            $id_boq_history = $id_boq_history->last_insert_id;
             
             $sendDataWbs['itemName'] = $itemName;
             $sendDataWbs['parentItem'] = $parentItem;
@@ -477,9 +486,74 @@ class BoqController extends Controller
             $url ="/api/InsertDataWbs";
             // echo "<br>";
             // print_r($sendDataWbs);
-            $this->insertData($url, $sendDataWbs);
+            $id_wbs = $this->insertData($url, $sendDataWbs);
+            $id_wbs = json_decode($id_wbs);
+            $id_wbs = $id_wbs->last_insert_id;
             $urlActual ="/api/InsertDataActualWbs";
-            $this->insertData($urlActual, $sendDataWbs);
+            $id_actual_wbs = $this->insertData($urlActual, $sendDataWbs);
+            $id_actual_wbs = json_decode($id_actual_wbs);
+            $id_actual_wbs = $id_actual_wbs->last_insert_id;
+            
+
+            $url = "/api/getAllBoqChild/" . $responseBody[$i]->id;
+
+            $responseBodyChild = json_decode($this->getData($url));
+            for ($j=0; $j < count($responseBodyChild); $j++) { 
+                $boqID = $responseBodyChild[$j]->id;
+                $itemName = $responseBodyChild[$j]->itemName;
+                $hasChild = $responseBodyChild[$j]->hasChild;
+                $qty = $responseBodyChild[$j]->qty;
+                $price = $responseBodyChild[$j]->price;
+                $unitID = $responseBodyChild[$j]->unitID;
+                $CurrencyID = $responseBodyChild[$j]->CurrencyID;
+                $level = $responseBodyChild[$j]->level;
+                $parentLevel = $responseBodyChild[$j]->parentLevel;
+                $weight=$responseBodyChild[$j]->weight;
+                $amount=$responseBodyChild[$j]->amount;
+
+                $url = "/api/InsertDataBoqHistory";
+                $sendData['boqID'] = $boqID;
+                $sendData['itemName'] = $itemName;
+                $sendData['parentItem'] = $id_boq_history;
+                $sendData['hasChild'] = $hasChild;
+                $sendData['qty'] = $qty;
+                $sendData['price'] = $price;
+                $sendData['amount'] = $amount;
+                $sendData['weight'] = $weight;
+                $sendData['ProjectID'] = $projectID;
+                $sendData['unitID'] = $unitID;
+                $sendData['contractorID'] = $contractorID;
+                $sendData['CurrencyID'] = $CurrencyID;
+                $sendData['Created_By'] = session('UserID');
+                $sendData['level'] = $level;
+                $sendData['parentlevel'] = $parentLevel;
+                $this->insertData($url, $sendData);
+                
+                $sendDataWbs['itemName'] = $itemName;
+                $sendDataWbs['parentItem'] = $id_wbs;
+                $sendDataWbs['hasChild'] = $hasChild;
+                $sendDataWbs['qty'] = $qty;
+                $sendDataWbs['price'] = $price;
+                $sendDataWbs['amount'] = $amount;
+                $sendDataWbs['startDate'] = '';
+                $sendDataWbs['endDate'] = '';
+                $sendDataWbs['weight'] = $weight;
+                $sendDataWbs['ProjectID'] = $projectID;
+                $sendDataWbs['unitID'] = $unitID;
+                $sendDataWbs['contractorID'] = $contractorID;
+                $sendDataWbs['CurrencyID'] = $CurrencyID;
+                $sendDataWbs['Created_By'] = session('UserID');
+                $sendDataWbs['level'] = $level;
+                $sendDataWbs['parentlevel'] = $parentLevel;
+                $url ="/api/InsertDataWbs";
+                // echo "<br>";
+                // print_r($sendDataWbs);
+                $this->insertData($url, $sendDataWbs);
+                $sendDataWbs['parentItem'] =  $id_actual_wbs;
+                $urlActual ="/api/InsertDataActualWbs";
+                $this->insertData($urlActual, $sendDataWbs);
+                
+            }
         }
     }
 

@@ -75,6 +75,8 @@ class BaselineWbsController extends Controller
         $x = 0;
         $z = 1;
         $y = 1;
+        $parentNo = 0;
+        $childNo = 1;
         $arr = array();
         for ($i = 0; $i < count($responseBody); $i++) {
             $responseBody[$i]->weight=round($responseBody[$i]->weight,2);
@@ -87,8 +89,10 @@ class BaselineWbsController extends Controller
 
             $responseBody[$i]->cost = ($responseBody[$i]->qty * $responseBody[$i]->price);
             if ($responseBody[$i]->parentItem == null) {
-                $responseBody[$i]->merge = $responseBody[$i]->no - $x;
+                $parentNo++;
+                $responseBody[$i]->merge = $parentNo;
                 $y = 1;
+                $childNo = 1;
             } else {
                 $arrx = array(
                     'id' => $responseBody[$i]->id,
@@ -97,7 +101,7 @@ class BaselineWbsController extends Controller
                 array_push($arr, $arrx);
                 $responseBody[$i]->action = '<button class="edit-btn btn btn-warning  waves-effect waves-light m-1" data-id="' . $responseBody[$i]->id . '">EDIT</button>
                 <button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1" data-ids="' . $responseBody[$i]->id . '">DELETE</button>';
-                $responseBody[$i]->merge = $responseBody[$i]->parentItem . '.' . $y;
+                $responseBody[$i]->merge = $parentNo . '.' . $childNo;
                 $responseBody[$i]->duration = '<input type="text" readonly class="form-control" style="background-color: rgba(21, 14, 14, 0)" id="duration_' . $responseBody[$i]->id . '" value="0"/>';
                 $responseBody[$i]->startDates = '<input type="date" class="startDate form-control" name ="startDate_' . $responseBody[$i]->id . '" id ="startDate_' . $responseBody[$i]->id . '" data-id="' . $responseBody[$i]->id . '" value="'.str_replace('/','-',$responseBody[$i]->startDate) .'">';
                 if($responseBody[$i]->endDate==null){
@@ -114,6 +118,7 @@ class BaselineWbsController extends Controller
                 }
                 $y += 1;
                 $x += 1;
+                $childNo++;
             }
         }
 
