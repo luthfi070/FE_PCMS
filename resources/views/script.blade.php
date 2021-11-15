@@ -129,7 +129,7 @@
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
         errorAlertServer('Response Not Found, Please Check Your Data');
-    });
+    })
 </script>
 
 @yield('script')
