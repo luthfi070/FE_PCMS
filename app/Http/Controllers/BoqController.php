@@ -341,7 +341,7 @@ class BoqController extends Controller
         $contractorID = $_POST['contractorID'];
         $url = "/api/InsertDataBoq";
         $sendData['itemName'] = $name;
-        $sendData['Created_By'] = 1;
+        $sendData['Created_By'] = session('UserID');
         $sendData['level'] = 0;
         $sendData['parentlevel'] = $level;
         $sendData['ProjectID'] = session('ProjectID');
@@ -390,7 +390,7 @@ class BoqController extends Controller
         $sendData['unitID'] = $unitTypechild;
         $sendData['contractorID'] = $contractorID;
         $sendData['CurrencyID'] = $currencyTypechild;
-        $sendData['Created_By'] = 1;
+        $sendData['Created_By'] = session('UserID');
         $sendData['level'] = $level;
         $sendData['parentlevel'] = $parentlevel;
         $responseBody = $this->insertData($url, $sendData);
