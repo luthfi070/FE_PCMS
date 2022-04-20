@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BoqController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,8 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::get('/boq', function () {
             return view('boq/boq');
         });
+
+        Route::get('/importBoq', [BoqController::class, 'importBoq']);
 
 
         Route::get('/boqHistory', function () {

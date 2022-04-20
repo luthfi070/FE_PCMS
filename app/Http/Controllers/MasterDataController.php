@@ -331,6 +331,17 @@ class MasterDataController extends Controller
         return  json_encode($responseBody);
     }
 
+    public function getOrInsertCurrencyByName($currency){
+        $url = "/api/getOrInsertCurrencyByName/" . $currency;
+        $url = config('global.api_url') . $url;
+        $client = new Client();
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        $responseBody = json_decode($response->getBody());
+        return  $responseBody;
+    }
+
     public function getCurrencyByid()
     {
         $id = $_POST['id'];
@@ -394,6 +405,17 @@ class MasterDataController extends Controller
         }
 
         return  json_encode($responseBody);
+    }
+
+    public function getOrInsertUnitBySymbol($symbol){
+        $url = "/api/getOrInsertUnitBySymbol/" . $symbol;
+        $url = config('global.api_url') . $url;
+        $client = new Client();
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        $responseBody = json_decode($response->getBody());
+        return  $responseBody;
     }
 
     public function getUnitByid()
