@@ -567,13 +567,13 @@ class BoqController extends Controller
         return  $responseBody;
     }
 
-    public function importBoq()
+    public function importBoq(Request $request)
     {
         $projectID = session('ProjectID');
-        $contractorID = 8;
+        $contractorID = $request->contractorID;
         $createdByID = session('UserID');
-        Excel::import(new BoqImport($projectID, $contractorID, $createdByID), 'boq.xlsx');
-        dd('anu');
+        Excel::import(new BoqImport($projectID, $contractorID, $createdByID), $request->file('fileExcel'));
+        return 'success';
     }
 
     //=============================================================================================================================================================================================================

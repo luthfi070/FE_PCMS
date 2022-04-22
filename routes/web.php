@@ -51,8 +51,6 @@ Route::middleware(['verify_auth'])->group(function () {
             return view('boq/boq');
         });
 
-        Route::get('/importBoq', [BoqController::class, 'importBoq']);
-
 
         Route::get('/boqHistory', function () {
             return view('boq/history');
@@ -350,6 +348,8 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::get('/getBoqHistory', ['as' => 'getBoq', 'uses' => 'BoqController@getBoqHistory']);
         Route::post('/getBoqHistoryDetail', ['as' => 'getBoqHistoryDetail', 'uses' => 'BoqController@getBoqHistoryDetail']);
         Route::post('/getBoqchild', ['as' => 'getBoqchild', 'uses' => 'BoqController@getBoqchild']);
+        Route::post('/importBoq', ['as' => 'importBoq', 'uses' => 'BoqController@importBoq']);
+
 
         Route::post('/addActualWbsParent', ['as' => 'addActualWbsParent', 'uses' => 'WbsController@addActualWbsParent']);
         Route::post('/addActualWbsChild', ['as' => 'addActualWbsChild', 'uses' => 'WbsController@addActualWbsChild']);

@@ -201,13 +201,12 @@
                 </div>
                 <div class="modal-body">
                     <form id="formImportBoq">
-                        <input type="hidden" class="form-control" id="contractorID" name="contractorID">
+                        <input type="hidden" class="form-control" id="contractorIDForBoq" name="contractorID" required>
                         <div class="form-group row">
                             <label for="input-21" class="col-sm-2 col-form-label">File Excel</label>
                             <div class="col-sm-10">
                                 {{-- input file excel --}}
-                                <input type="file" class="form-control" id="fileExcel" name="fileExcel" placeholder="Masukkan File Excel">
-
+                                <input type="file" class="form-control" id="fileExcel" name="fileExcel" placeholder="Masukkan File Excel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
                             </div>
                         </div>
                     </form>
@@ -779,6 +778,38 @@
             }).fail(function(jqXHR, textStatus, errorThrown) {
                 errorAlertServer('Response Not Found, Please Check Your Data');
             });
+        });
+
+        $('#btn-import-boq').click(function(e) {
+            e.preventDefault;
+            $('#btn-import-boq').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span> Loading...');
+            $('#btn-import-boq').prop("disabled", true);
+            var formData = new FormData();
+            formData.append('contractorID', $('#contractor-list').val());
+            formData.append('fileExcel', $('#fileExcel')[0].files[0]);
+            $.ajax({
+                method: "POST",
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: formData,
+                enctype: "multipart/form-data",
+                url: '/importBoq',
+                success: function (res){
+                        successAlert('Import','Boq','success');
+                        $('#example').DataTable().ajax.reload();
+                        $('#importBoqModal').modal('toggle');
+                   
+                },
+                error: function (e) {
+                    errorAlert('Import','Boq','failed');
+                    $('#btn-import-boq').html('<i class="fa fa-upload"></i> Import');
+                    $('#btn-import-boq').prop("disabled", false);
+                }
+            });
+            // $('#contractorIDForBoq').val($('#contractor-list').val());
+            // $('#form-import-boq').submit();
+            // console.log('masuk');
         });
 
         $('#example tbody').on('click', '.confirm-btn-alert', function() {
