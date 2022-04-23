@@ -119,7 +119,7 @@
         },
         dataType: "JSON"
     }).done(function(msg) {
-        var option = "<option value='0' selected>-- Select Contractor Name --</option>";
+        var option = "<option value='0' selected disabled>-- Select Contractor Name --</option>";
         for (var i = 0; i < msg.length; i++) {
       
             option += "<option value='" + msg[i].id + "'>" + msg[i].BussinessName + "</option>";

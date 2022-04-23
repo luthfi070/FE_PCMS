@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BoqController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -347,6 +348,8 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::get('/getBoqHistory', ['as' => 'getBoq', 'uses' => 'BoqController@getBoqHistory']);
         Route::post('/getBoqHistoryDetail', ['as' => 'getBoqHistoryDetail', 'uses' => 'BoqController@getBoqHistoryDetail']);
         Route::post('/getBoqchild', ['as' => 'getBoqchild', 'uses' => 'BoqController@getBoqchild']);
+        Route::post('/importBoq', ['as' => 'importBoq', 'uses' => 'BoqController@importBoq']);
+
 
         Route::post('/addActualWbsParent', ['as' => 'addActualWbsParent', 'uses' => 'WbsController@addActualWbsParent']);
         Route::post('/addActualWbsChild', ['as' => 'addActualWbsChild', 'uses' => 'WbsController@addActualWbsChild']);

@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\BoqImport;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BoqController extends Controller
 {
     private $baseApi = "localhost:8001";
 
-    private function getData($url)
+    public function getData($url)
     {
         $url = config('global.api_url') . "" . $url;
         $client = new Client();
@@ -24,7 +26,7 @@ class BoqController extends Controller
         return json_encode($responseBody);
     }
 
-    private function updateData($url, $array)
+    public function updateData($url, $array)
     {
         $client = new Client();
         $url = config('global.api_url') . "" . $url;
@@ -36,7 +38,7 @@ class BoqController extends Controller
         return  $responseBody;
     }
 
-    private function insertData($url, $array)
+    public function insertData($url, $array)
     {
         $client = new Client();
         $url = config('global.api_url') . "" . $url;
@@ -563,6 +565,15 @@ class BoqController extends Controller
         $url = "/api/DeleteBoq/" . $id;
         $responseBody = $this->DeleteData($url);
         return  $responseBody;
+    }
+
+    public function importBoq(Request $request)
+    {
+        $projectID = session('ProjectID');
+        $contractorID = $request->contractorID;
+        $createdByID = session('UserID');
+        Excel::import(new BoqImport($projectID, $contractorID, $createdByID), $request->file('fileExcel'));
+        return 'success';
     }
 
     //=============================================================================================================================================================================================================
