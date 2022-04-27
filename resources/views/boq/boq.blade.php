@@ -796,20 +796,17 @@
                 enctype: "multipart/form-data",
                 url: '/importBoq',
                 success: function (res){
-                        successAlert('Import','Boq','success');
-                        $('#example').DataTable().ajax.reload();
-                        $('#importBoqModal').modal('toggle');
-                   
+                    successAlert('Import','Boq','success');
+                    $('#example').DataTable().ajax.reload();
+                    $('#importBoqModal').modal('toggle');
                 },
                 error: function (e) {
+                    console.log(e);
                     errorAlert('Import','Boq','failed');
                     $('#btn-import-boq').html('<i class="fa fa-upload"></i> Import');
                     $('#btn-import-boq').prop("disabled", false);
                 }
             });
-            // $('#contractorIDForBoq').val($('#contractor-list').val());
-            // $('#form-import-boq').submit();
-            // console.log('masuk');
         });
 
         $('#example tbody').on('click', '.confirm-btn-alert', function() {
