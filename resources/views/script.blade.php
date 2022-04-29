@@ -1,8 +1,8 @@
 <script src="{{url('assets/js/jquery.min.js')}}"></script>
 <script src="{{url('assets/js/popper.min.js')}}"></script>
 <script src="{{url('assets/js/bootstrap.min.js')}}"></script>
-{{-- <script src="{{url('assets/plugins/raphael/raphael-min.js')}}"></script> --}}
-{{-- <script src="{{url('assets/plugins/morris/js/morris.js')}}"></script> --}}
+<script src="{{url('assets/plugins/raphael/raphael-min.js')}}"></script>
+<script src="{{url('assets/plugins/morris/js/morris.js')}}"></script>
 
 <!-- simplebar js -->
 <script src="{{url('assets/plugins/simplebar/js/simplebar.js')}}"></script>

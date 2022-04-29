@@ -389,6 +389,7 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::post('/updateWbsParent', ['as' => 'updateWbsParent', 'uses' => 'BaselineWbsController@updateWbsParent']);
         Route::post('/updateWbsChild', ['as' => 'updateWbsChild', 'uses' => 'BaselineWbsController@updateWbsChild']);
         Route::post('/deleteWbs', ['as' => 'deleteWbs', 'uses' => 'BaselineWbsController@deleteWbs']);
+        Route::post('/importBaselineWbs', ['as' => 'importBaselineWbs', 'uses'=> 'BaselineWbsController@importBaselineWbs']);
 
         Route::post('/addCurrentWbsParent', ['as' => 'addCurrentWbsParent', 'uses' => 'CurrentWbsController@addCurrentWbsParent']);
         Route::post('/addCurrentWbsChild', ['as' => 'addCurrentWbsChild', 'uses' => 'CurrentWbsController@addCurrentWbsChild']);
