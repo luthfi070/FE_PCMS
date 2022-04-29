@@ -23,7 +23,9 @@ Route::get('/home', ['as' => 'home', function () {
 Route::get('/logout', function () {
     session()->forget('UserID');
     session()->forget('PrivilegedStatus');
-    return view('login');
+    session()->forget('ProjectID');
+    session()->forget('ProjectName');
+    return redirect()->route('index');
 });
 Route::get('/', function () {
     return view('login');
