@@ -53,7 +53,7 @@
 
     $.ajax({
         type: "POST",
-        url: '/getWbsGantt/',
+        url: '/getWbsGantt',
         data: {
             _token: "{{ csrf_token() }}",
             id: url[0]
