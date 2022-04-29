@@ -106,7 +106,6 @@
 @section('script')
 <script>
     $(document).ready(function() {
-        var privilegedstatus="<?php echo session('PrivilegedStatus');?>";
         let d = new Date();
         let ye = new Intl.DateTimeFormat('en', {
             timeZone: 'Asia/Jakarta',
@@ -174,6 +173,7 @@
     });
 
     $('#contractor-list').on('change', function() {
+        var privilegedstatus="<?php echo session('PrivilegedStatus');?>";
         $('#example').DataTable().destroy();
             var table = $('#example').DataTable({
             lengthChange: false,

@@ -86,7 +86,7 @@
                         </div>
 
                         <button type="submit" style="display: none;" class="btn btn-warning btn-block" id="btn-signin">Sign In</button>
-                        <button type="submit" style="display: none;" class="btn btn-light btn-block" id="btn-signin-guest">Guest</button>
+                        <button type="button" style="display: none;" class="btn btn-light btn-block" id="btn-signin-guest">Guest</button>
                     </form>
                     <button class="btn btn-warning btn-block" id="btn-signin-show">Sign In</button>
                         <button class="btn btn-light btn-block" id="btn-signin-guest-show">Guest</button>
@@ -151,7 +151,7 @@
     <script src="{{url('assets/plugins/jquery-validation/js/jquery.validate.min.js')}}"></script>
 
     <script>
-        var status=0;
+        var status=1;
         $('#btn-signin-show').click(function(e) {
             status=1;
             $('#btn-signin').click();
