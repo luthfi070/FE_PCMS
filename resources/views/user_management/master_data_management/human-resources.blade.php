@@ -392,7 +392,9 @@
                     id: id
                 }
             }).done(function(msg) {
+                console.log(msg);
                 datob = JSON.parse(msg);
+                console.log(datob);
                 $('#idPersonil').val(datob[0].id);
                 $('#PersonilNameEdit').val(datob[0].PersonilName);
                 $('#PersonilAddressEdit').val(datob[0].Address);
