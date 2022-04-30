@@ -807,8 +807,7 @@ class MasterDataController extends Controller
         $url = "/api/UpdateDataPersonil/" . $idPersonil;
         $sendData['BussinessPartnerID'] = $BusinessNameEdit;
         $sendData['PersonilName'] = $PersonilNameEdit;
-        $sendData['Address'] = $PersonilNameEdit;
-        $sendData['Postzip'] = $PersonilAddressEdit;
+        $sendData['Address'] = $PersonilAddressEdit;
         $sendData['CountryID'] = $CountryNameEdit;
         $sendData['CityID'] = $CityNameEdit;
         $sendData['Postzip'] = $PostZipEdit;
