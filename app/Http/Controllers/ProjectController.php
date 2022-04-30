@@ -133,7 +133,7 @@ class ProjectController extends Controller
         // $session = session('ProjectID');
 
         for ($i = 0; $i < count($responseBody); $i++) {
-            $responseBody[$i]->action = '<button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1" data-ids="' . $responseBody[$i]->id. '">DELETE</button>';
+            $responseBody[$i]->action = '<button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1 deleteConsultant" data-ids="' . $responseBody[$i]->id. '">DELETE</button>';
             // $responseBody[$i]->No = $i+1;
         }
         return  $responseBody;
@@ -144,7 +144,7 @@ class ProjectController extends Controller
         $url = "/api/DataProjectnumberByidContractor/" . $id;
         $responseBody = json_decode($this->getData($url));
         for ($i = 0; $i < count($responseBody); $i++) {
-            $responseBody[$i]->action = '<button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1" data-ids="' . $responseBody[$i]->id. '">DELETE</button>';
+            $responseBody[$i]->action = '<button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1 deleteContractor" data-ids="' . $responseBody[$i]->id. '">DELETE</button>';
             // $responseBody[$i]->No = $i+1;
         }
         return  $responseBody;
@@ -360,6 +360,12 @@ class ProjectController extends Controller
         $responseBody = $this->getData($url);
         $id = json_decode($responseBody, true);
         return $id+1;
+    }
+
+    public function deleteProjectNumber(){
+        $url = "/api/deleteProjectNumber/".$_POST['id'];
+        $responseBody = $this->DeleteData($url);
+        return json_decode($responseBody);
     }
 
 

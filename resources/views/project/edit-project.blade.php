@@ -544,52 +544,50 @@
         var ArrayConsultant = [];
         var ArrayContractor = [];
     
-         $.ajax({
-                type: "POST",
-                url: '/getProjectByid',
-                
-                data: {
+        $.ajax({
+            type: "POST",
+            url: '/getProjectByid',
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: <?php echo $id ?>
+            }
+        }).done(function(msg) {
+            
+            datob = JSON.parse(msg);
+            id=$('#Projectid').val(datob[0].ProjectID);
 
-                    _token: "{{ csrf_token() }}",
-                    id: <?php echo $id ?>
-                }
-            }).done(function(msg) {
-                
-                datob = JSON.parse(msg);
-                id=$('#Projectid').val(datob[0].ProjectID);
+            $('#ProjectNameEdit').val(datob[0].ProjectName);
+            $('#ProjectDescEdit').val(datob[0].ProjectDesc);
+            var newOption1 = new Option(datob[0].BussinessName, datob[0].ProjectOwner, true, true);
+            $('#ProjectOwnerEdit').append(newOption1).trigger('change');       
+            var newOption2 = new Option(datob[0].PersonilName, datob[0].ProjectManager, true, true);
+            $('#ProjectManagerOwnerEdit').append(newOption2).trigger('change');
+            var newOption3 = new Option(datob[0].CurrencyName, datob[0].Currenctype, true, true);
+            $('#CurrencyTypeEdit').append(newOption3).trigger('change');
+            $('#ContractAmountEdit').val(datob[0].ContractAmount);
 
-                $('#ProjectNameEdit').val(datob[0].ProjectName);
-                $('#ProjectDescEdit').val(datob[0].ProjectDesc);
-                var newOption1 = new Option(datob[0].BussinessName, datob[0].ProjectOwner, true, true);
-                $('#ProjectOwnerEdit').append(newOption1).trigger('change');       
-                var newOption2 = new Option(datob[0].PersonilName, datob[0].ProjectManager, true, true);
-                $('#ProjectManagerOwnerEdit').append(newOption2).trigger('change');
-                var newOption3 = new Option(datob[0].CurrencyName, datob[0].Currenctype, true, true);
-                $('#CurrencyTypeEdit').append(newOption3).trigger('change');
-                $('#ContractAmountEdit').val(datob[0].ContractAmount);
-
-                // var newOption4 = new Option(datob[0].village_id.substring(0,4), datob[0].village_id.substring(0,4), true, true);
-                // $('#regency').append(newOption4).trigger('change');
-                $.ajax({
-                    type: "GET",
-                    url: '/getDataLocation/'+datob[0].village_id,
-                    data: ''
-                }).done(function(data){
-                    data = JSON.parse(data);
-                    console.log(data);
-                    var regency = new Option(data.district.regency.name, data.district.regency.id, true, true);
-                    $('#regency').append(regency).trigger('change');
-                    var district = new Option(data.district.name, data.district.id, true, true);
-                    $('#district').append(district).trigger('change');
-                    var village = new Option(data.name, data.id, true, true);
-                    $('#village').append(village).trigger('change');
-                });
-                // $('#regency').val(datob[0].village_id.substring(0,4)).trigger('change');
-                // $('#formmodaledit').window.location('/editproject');
-                
+            // var newOption4 = new Option(datob[0].village_id.substring(0,4), datob[0].village_id.substring(0,4), true, true);
+            // $('#regency').append(newOption4).trigger('change');
+            $.ajax({
+                type: "GET",
+                url: '/getDataLocation/'+datob[0].village_id,
+                data: ''
+            }).done(function(data){
+                data = JSON.parse(data);
+                console.log(data);
+                var regency = new Option(data.district.regency.name, data.district.regency.id, true, true);
+                $('#regency').append(regency).trigger('change');
+                var district = new Option(data.district.name, data.district.id, true, true);
+                $('#district').append(district).trigger('change');
+                var village = new Option(data.name, data.id, true, true);
+                $('#village').append(village).trigger('change');
             });
+            // $('#regency').val(datob[0].village_id.substring(0,4)).trigger('change');
+            // $('#formmodaledit').window.location('/editproject');
+            
+        });
 
-            $('.btn-primary').on('click', function() {
+        $('.btn-primary').on('click', function() {
             // var id = $(this).data("id");
             $.ajax({
                 type: "POST",
@@ -617,7 +615,6 @@
                     id: <?php echo $id ?>
                 }
             }).done(function(msg) {
-                
                 datob = JSON.parse(msg);
                 id=$('#ProjectidConsultant').val(<?php echo $id ?>); 
             });
@@ -659,10 +656,7 @@
             });
         });
 
-
-          
-
-            $('#Consultant').select2({
+        $('#Consultant').select2({
             //dropdownParent: $('#formmodalEdit'),
             ajax: {
                 type: 'GET',
@@ -823,33 +817,33 @@
         });
 
 
-            $('#ProjectOwnerEdit').select2({
-                //dropdownParent: $('#formmodalEdit'),
-                ajax: {
-                    type: 'POST',
-                    url: '/getProjectOwner',
-                    data: {
-                        _token: "{{ csrf_token() }}"
-                    },
-                    processResults: function(data) {
+        $('#ProjectOwnerEdit').select2({
+            //dropdownParent: $('#formmodalEdit'),
+            ajax: {
+                type: 'POST',
+                url: '/getProjectOwner',
+                data: {
+                    _token: "{{ csrf_token() }}"
+                },
+                processResults: function(data) {
 
-                        datob = JSON.parse(data);
-                        return {
+                    datob = JSON.parse(data);
+                    return {
 
-                            results: $.map(datob, function(item) {
-                                return {
-                                    text: item.BussinessName,
-                                    slug: item.BussinessName,
-                                    id: item.id
-                                }
-                            })
-                        };
-                    }
+                        results: $.map(datob, function(item) {
+                            return {
+                                text: item.BussinessName,
+                                slug: item.BussinessName,
+                                id: item.id
+                            }
+                        })
+                    };
                 }
-            });
+            }
+        });
 
-            $('#ProjectOwnerEdit').on('change', function() {
-                $('#ProjectManagerOwnerEdit').select2({
+        $('#ProjectOwnerEdit').on('change', function() {
+            $('#ProjectManagerOwnerEdit').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
                     type: 'POST',
@@ -874,13 +868,10 @@
                     }
                 }
             });
-            });
+        });
 
-            $('#btn_submit_consultant').click(function(e) {
+        $('#btn_submit_consultant').click(function(e) {
             e.preventDefault;
-            
-           
-
             $.ajax({
                 type: "POST",
                 url: '/addProjectNumber',
@@ -891,7 +882,7 @@
                 datob = JSON.parse(msg);
                 //  id=$('#ProjectidConsultant').val(datob[0].id);
                 
-                $('#example').DataTable().ajax.reload();
+                $('#consultant').DataTable().ajax.reload();
                 if (datob != 'error') {
                     successAlert('Add', $('#ContractNumberConsultant').val(), 'success');
                     $('#ForminsertConsultant')[0].reset();
@@ -938,7 +929,7 @@
                 datob = JSON.parse(msg);
                 //  id=$('#ProjectidConsultant').val(datob[0].id);
                 
-                $('#example').DataTable().ajax.reload();
+                $('#contractor').DataTable().ajax.reload();
                 if (datob != 'error') {
                     successAlert('Add', $('#ContractNumberConsultant').val(), 'success');
                     $('#ForminsertContractor')[0].reset();
@@ -966,15 +957,51 @@
                     $('#ContractCurrencyContractor').val('');
                     $('#ContractAmountContractor').val('');
                 }
-                $('#formmodal').modal('toggle');
+                $('#ContractorForm').modal('toggle');
             });
 
         });
 
+        $('#contractor').on('click', '.deleteContractor', function(e){
+            if(confirm('Are you sure you want to delete this Contractor? This action cannot be undone.')){
+                $.ajax({
+                    type: "POST",
+                    url: '/deleteProjectNumber',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: $(this).attr('data-ids')
+                    }
+                }).done(function(msg) {
+                    datob = JSON.parse(msg);
+                    if (datob != 'error') {
+                        successAlert('Delete', 'Contractor', 'success');
+                        $('#contractor').DataTable().ajax.reload();
+                    } else {
+                        errorAlert('Delete', 'Contractor', 'error');
+                    }
+                });
+            }
+        });
 
-        $('#consultant tbody').on("click", ".deleteConsultant", function() {
-            console.log($(this).parent());
-            table.row($(this).parents('tr')).remove().draw(false);
+        $('#consultant').on('click', '.deleteConsultant', function(e){
+            if(confirm('Are you sure you want to delete this Consultant? This action cannot be undone.')){
+                $.ajax({
+                    type: "POST",
+                    url: '/deleteProjectNumber',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: $(this).attr('data-ids')
+                    }
+                }).done(function(msg) {
+                    datob = JSON.parse(msg);
+                    if (datob != 'error') {
+                        successAlert('Delete', 'Consultant', 'success');
+                        $('#consultant').DataTable().ajax.reload();
+                    } else {
+                        errorAlert('Delete', 'Consultant', 'error');
+                    }
+                });
+            }
         });
 
         

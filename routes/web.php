@@ -203,6 +203,7 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::post('/getprojectnumberByidproject', ['as' => 'getprojectnumberByidproject', 'uses' => 'ProjectController@getprojectnumberByidproject']);
         Route::post('/getprojectnumberByidprojectContractor', ['as' => 'getprojectnumberByidprojectContractor', 'uses' => 'ProjectController@getprojectnumberByidprojectContractor']);
         Route::post('/getLastProjectnumber', ['as' => 'getLastProjectnumber', 'uses' => 'ProjectController@getLastProjectnumber']);
+        Route::post('/deleteProjectNumber', ['as' => 'deleteProjectNumber', 'uses' => 'ProjectController@deleteProjectNumber']);
         Route::post('/addProjectNumber', ['as' => 'addProjectNumber', 'uses' => 'ProjectController@addProjectNumber']);
         Route::post('/addProjectNumberContractor', ['as' => 'addProjectNumberContractor', 'uses' => 'ProjectController@addProjectNumberContractor']);
         Route::post('/ProjectIDConsultant', ['as' => 'ProjectIDConsultant', 'uses' => 'ProjectController@ProjectIDConsultant']);
