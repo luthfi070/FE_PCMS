@@ -332,7 +332,7 @@ class MasterDataController extends Controller
     }
 
     public function getOrInsertCurrencyByName($currency){
-        $url = "/api/getOrInsertCurrencyByName/" . $currency;
+        $url = "/api/getOrInsertCurrencyByName?currencyName=" . $currency;
         $url = config('global.api_url') . $url;
         $client = new Client();
         $response = $client->request('GET', $url, [
@@ -408,7 +408,7 @@ class MasterDataController extends Controller
     }
 
     public function getOrInsertUnitBySymbol($symbol){
-        $url = "/api/getOrInsertUnitBySymbol/" . $symbol;
+        $url = "/api/getOrInsertUnitBySymbol?symbol=" . $symbol;
         $url = config('global.api_url') . $url;
         $client = new Client();
         $response = $client->request('GET', $url, [
