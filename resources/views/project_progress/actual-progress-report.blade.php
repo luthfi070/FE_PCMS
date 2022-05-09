@@ -491,15 +491,17 @@
                 //     console.log($('#totalThisMonth').val());
                 // }
                 $("#bar-chart").empty();
-                Morris.Bar({
+                Morris.Line({
                     element: 'bar-chart',
                     data: data,
                     xkey: 'x',
                     ykeys: ['baseline', 'actual', 'current'],
                     labels: ['Baseline', 'Actual', 'Current'],
-                    barColors: ['#03d0ea', '#d13adf', '#fba540'],
+                    lineColors: ['#03d0ea', '#d13adf', '#fba540'],
                     gridTextColor: "#ddd",
-                    resize: true
+                    resize: true,
+                    parseTime: false,
+                    smooth: true,
                 });
 
                 $("#bar-chart-finance").empty();

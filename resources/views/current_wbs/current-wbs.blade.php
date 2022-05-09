@@ -989,15 +989,17 @@
                                 dataType: "JSON"
                             }).done(function(data) {
                                 $("#bar-chart").empty();
-                                Morris.Bar({
+                                Morris.Line({
                                     element: 'bar-chart',
                                     data: data,
                                     xkey: 'x',
                                     ykeys: ['baseline', 'actual'],
                                     labels: ['Baseline', 'Actual'],
-                                    barColors: ['#03d0ea', '#d13adf', '#fba540'],
+                                    lineColors: ['#03d0ea', '#d13adf', '#fba540'],
                                     gridTextColor: "#ddd",
-                                    resize: true
+                                    resize: true,
+                                    parseTime: false,
+                                    smooth: true,
                                 });
 
                             }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -1247,15 +1249,17 @@
                                 dataType: "JSON"
                             }).done(function(data) {
                                 $("#bar-chart").empty();
-                                Morris.Bar({
+                                Morris.Line({
                                     element: 'bar-chart',
                                     data: data,
                                     xkey: 'x',
                                     ykeys: ['baseline', 'actual'],
                                     labels: ['Baseline', 'Actual'],
-                                    barColors: ['#03d0ea', '#d13adf', '#fba540'],
+                                    lineColors: ['#03d0ea', '#d13adf', '#fba540'],
                                     gridTextColor: "#ddd",
-                                    resize: true
+                                    resize: true,
+                                    parseTime: false,
+                                    smooth: true,
                                 });
 
                             }).fail(function(jqXHR, textStatus, errorThrown) {
