@@ -895,7 +895,17 @@
                     }
                 }).done(function(msg) {
                     datob = JSON.parse(msg);
+
+                    $.ajax({
+                        type: "GET",
+                        url: '/getWbsParentDuration/'+datob.parentItem,
+                    }).done(function(data) {
+                        console.log(data);
+                        $('#parent_duration_' + datob.parentItem).val(data.duration+" Days");
+                    });
+
                 });
+                
 
                 $('#duration_' + id).val(date_diff_indays(startDateJoin, endDateJoin) + " Day");
             }

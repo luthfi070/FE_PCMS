@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -80,6 +81,7 @@ class CurrentWbsController extends Controller
             $parentNo = 0;
             $childNo = 1;
             $arr = array();
+            $totalDuration = array();
             for ($i = 0; $i < count($responseBody); $i++) {
                 $responseBody[$i]->weight=round($responseBody[$i]->weight,2);
                 $responseBody[$i]->action = ' <button type="button" class="btn-form-child btn btn-info  waves-effect waves-light m-1" data-lvl="' . $responseBody[$i]->parentLevel . '" data-id="' . $responseBody[$i]->id . '">Add Child Item</button>
@@ -95,16 +97,19 @@ class CurrentWbsController extends Controller
                     $responseBody[$i]->merge = $parentNo;
                     $y = 1;
                     $childNo = 1;
+                    $totalDuration[$responseBody[$i]->id] = 0;
                 } else {
                     $arrx = array(
                         'id' => $responseBody[$i]->id,
                         'mergeBase' => $responseBody[$i]->parentItem . '.' . $y
                     );
                     array_push($arr, $arrx);
+                    $duration = (new DateTime($responseBody[$i]->startDate))->diff(new DateTime($responseBody[$i]->endDate))->format("%a");
+                    $totalDuration[$responseBody[$i]->parentItem] += $duration;
                     $responseBody[$i]->action = '<button class="edit-btn btn btn-warning  waves-effect waves-light m-1" data-id="' . $responseBody[$i]->id . '">EDIT</button>
                     <button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1" data-ids="' . $responseBody[$i]->id . '">DELETE</button>';
                     $responseBody[$i]->merge = $parentNo . '.' . $childNo;
-                    $responseBody[$i]->duration = floor((strtotime($responseBody[$i]->endDate) - strtotime($responseBody[$i]->startDate)) / 86400);
+                    $responseBody[$i]->duration = $duration.' D';
                     $responseBody[$i]->startDates = str_replace('/', '-', $responseBody[$i]->startDate);
     
                     $responseBody[$i]->endDates = str_replace('/', '-', $responseBody[$i]->endDate);
@@ -119,6 +124,15 @@ class CurrentWbsController extends Controller
                     $y += 1;
                     $childNo++;
                     $x += 1;
+                }
+
+                // add total duration for parent
+                foreach($responseBody as $item){
+                    if($item->parentItem == null){
+                        if(isset($totalDuration[$item->id])){
+                            $item->duration = $totalDuration[$item->id].' D';
+                        }
+                    }
                 }
             }
             $responseBodyFix=$responseBody;

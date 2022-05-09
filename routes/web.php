@@ -518,3 +518,4 @@ Route::middleware(['verify_auth'])->group(function () {
     Route::get('/getDistrict/{regency_id}', 'LocationController@getDistrict');
     Route::get('/getVillage/{district_id}', 'LocationController@getVillage');
     Route::get('/getDataLocation/{village_id}', 'LocationController@getDataLocation');
+    Route::get('/getWbsParentDuration/{id}', ['as' => 'getWbsParentDuration', 'uses' => 'BaselineWbsController@getWbsParentDuration']);

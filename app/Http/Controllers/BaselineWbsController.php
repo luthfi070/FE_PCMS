@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\WbsImport;
+use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -80,6 +81,7 @@ class BaselineWbsController extends Controller
         $parentNo = 0;
         $childNo = 1;
         $arr = array();
+        $totalDuration = array();
         for ($i = 0; $i < count($responseBody); $i++) {
             $responseBody[$i]->weight=round($responseBody[$i]->weight,2);
             $responseBody[$i]->action = ' <button type="button" class="btn-form-child btn btn-info  waves-effect waves-light m-1" data-lvl="' . $responseBody[$i]->parentLevel . '" data-id="' . $responseBody[$i]->id . '">Add Child Item</button>
@@ -95,16 +97,19 @@ class BaselineWbsController extends Controller
                 $responseBody[$i]->merge = $parentNo;
                 $y = 1;
                 $childNo = 1;
+                $totalDuration[$responseBody[$i]->id] = 0;
             } else {
                 $arrx = array(
                     'id' => $responseBody[$i]->id,
                     'mergeBase' => $responseBody[$i]->parentItem . '.' . $y
                 );
                 array_push($arr, $arrx);
+                $duration = (new DateTime($responseBody[$i]->startDate))->diff(new DateTime($responseBody[$i]->endDate))->format("%a");
+                $totalDuration[$responseBody[$i]->parentItem] += $duration;
                 $responseBody[$i]->action = '<button class="edit-btn btn btn-warning  waves-effect waves-light m-1" data-id="' . $responseBody[$i]->id . '">EDIT</button>
                 <button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1" data-ids="' . $responseBody[$i]->id . '">DELETE</button>';
                 $responseBody[$i]->merge = $parentNo . '.' . $childNo;
-                $responseBody[$i]->duration = '<input type="text" readonly class="form-control" style="background-color: rgba(21, 14, 14, 0)" id="duration_' . $responseBody[$i]->id . '" value="0"/>';
+                $responseBody[$i]->duration = '<input type="text" readonly class="form-control" style="background-color: rgba(21, 14, 14, 0)" id="duration_' . $responseBody[$i]->id . '" value="'.$duration." Days".'"/>';
                 $responseBody[$i]->startDates = '<input type="date" class="startDate form-control" name ="startDate_' . $responseBody[$i]->id . '" id ="startDate_' . $responseBody[$i]->id . '" data-id="' . $responseBody[$i]->id . '" value="'.str_replace('/','-',$responseBody[$i]->startDate) .'">';
                 if($responseBody[$i]->endDate==null){
                     $responseBody[$i]->endDates = '<input type="date" readonly class="endDate form-control" name ="endDate_' . $responseBody[$i]->id . '" id ="endDate_' . $responseBody[$i]->id . '" data-id="' . $responseBody[$i]->id . '" value="'.str_replace('/','-',$responseBody[$i]->endDate) .'">';
@@ -121,6 +126,15 @@ class BaselineWbsController extends Controller
                 $y += 1;
                 $x += 1;
                 $childNo++;
+            }
+        }
+
+        // add total duration for parent
+        foreach($responseBody as $item){
+            if($item->parentItem == null){
+                if(isset($totalDuration[$item->id])){
+                    $item->duration = '<input type="text" readonly class="form-control" style="background-color: rgba(21, 14, 14, 0)" id="parent_duration_' . $item->id . '" value="'. $totalDuration[$item->id].' Days' .'"/>';
+                }
             }
         }
 
@@ -266,6 +280,17 @@ class BaselineWbsController extends Controller
         $url = "/api/DataWbsByid/" . $id;
         $responseBody = $this->getData($url);
         return  $responseBody;
+    }
+
+    public function getWbsParentDuration($id){
+        $url = "/api/getWbsParentDuration/" . $id;
+        $url = config('global.api_url') . "" . $url;
+        $client = new Client();
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        $responseBody = $response;
+        return $responseBody;
     }
 
     public function updateWbsParent()

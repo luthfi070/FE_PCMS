@@ -17,6 +17,8 @@
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.7",
         "maatwebsite/excel": "^3.1",
+        "nyholm/psr7": "^1.5",
+        "symfony/psr-http-message-bridge": "^2.1",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
