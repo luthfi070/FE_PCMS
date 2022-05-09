@@ -527,22 +527,46 @@ class BaselineWbsController extends Controller
         $arrTemp = [];
         $tasks = [];
         $days = 0;
+        $totalDuration = array();
+        $lowestDate = array();
         for ($i = 0; $i < count($responseBody); $i++) {
-            $x = strtotime($responseBody[$i]->endDate) - strtotime($responseBody[$i]->startDate);
-            $days = floor($x / 86400);
+            $days = (new DateTime($responseBody[$i]->startDate))->diff(new DateTime($responseBody[$i]->endDate))->format("%a");
+            $date = strtotime($responseBody[$i]->startDate);
+            if($responseBody[$i]->parentItem == null){
+                $totalDuration[$responseBody[$i]->id] = 0;
+            }else{
+                // add duration to parent
+                $totalDuration[$responseBody[$i]->parentItem] += $days;
+
+                // check lowest date
+                if( empty($lowestDate[$responseBody[$i]->parentItem]) || $date < $lowestDate[$responseBody[$i]->parentItem]){
+                    $lowestDate[$responseBody[$i]->parentItem] = $date;
+                }
+            }
             $a = array(
                 "id" => $responseBody[$i]->id,
                 "text" => $responseBody[$i]->itemName,
-                "start_date" => date("d-m-Y", strtotime($responseBody[$i]->startDate)),
+                "start_date" => date("d-m-Y", $date),
                 "duration" => $days,
                 "progress" => $responseBody[$i]->weight,
                 "parent" => $responseBody[$i]->parentItem == null ? 0 : $responseBody[$i]->parentItem
             );
             array_push($arrTemp, $a);
         }
+
+        // add total duration for parentItem
+        foreach ($arrTemp as &$item){
+            if($item['parent'] == 0){
+                if(isset($totalDuration[$item['id']])){
+                    $item['duration'] = $totalDuration[$item['id']];
+                }
+                if(isset($lowestDate[$item['id']])){
+                    $item['start_date'] = date("d-m-Y", $lowestDate[$item['id']]);
+                }
+            }
+        }
         
-        $responseBody[0]->tasks = $arrTemp;
-        return json_encode($responseBody[0]->tasks = $arrTemp);
+        return json_encode($arrTemp);
     }
     
     public function getBaselineChart()
