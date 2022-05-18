@@ -572,8 +572,7 @@ class BaselineWbsController extends Controller
     public function getBaselineChart()
     {
         $contractorID = $_POST['contractorID'];
-        $projectID=10;
-        // $projectID=session('ProjectID');
+        $projectID=session('ProjectID');
         $url = "/api/getBaselineChart/" . $projectID."/".$contractorID;
         $responseBody = $this->getData($url);
         return  $responseBody;
