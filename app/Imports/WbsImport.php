@@ -24,6 +24,7 @@ class WbsImport implements ToCollection, WithHeadingRow
         $baselineWbsController = new BaselineWbsController;
         $parentID=null;
         $parentChildID=null;
+        dd($collection);
         foreach($collection as $row){
             //conver number to string
             $row['no'] = (string)$row['no'];
