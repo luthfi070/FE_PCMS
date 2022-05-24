@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use stdClass;
 
+
 class WbsImport implements ToCollection, WithHeadingRow
 {
     public function __construct($projectID, $contractorID, $createdByID){
@@ -16,6 +17,21 @@ class WbsImport implements ToCollection, WithHeadingRow
         $this->contractorID = $contractorID;
         $this->createdByID = $createdByID;
     }
+    
+    /**
+     * Transform a date value into a Carbon object.
+     *
+     * @return \Carbon\Carbon|null
+     */
+    public function transformDate($value, $format = 'Y-m-d')
+    {
+        try {
+            return \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value))->format('Y-m-d');
+        } catch (\ErrorException $e) {
+            return \Carbon\Carbon::createFromFormat($format, $value)->format('Y-m-d');
+        }
+    }
+
     /**
     * @param Collection $collection
     */
@@ -24,13 +40,12 @@ class WbsImport implements ToCollection, WithHeadingRow
         $baselineWbsController = new BaselineWbsController;
         $parentID=null;
         $parentChildID=null;
-        dd($collection);
         foreach($collection as $row){
             //conver number to string
             $row['no'] = (string)$row['no'];
             //check if no > 1
             if(strlen($row['no']) > 1){
-                $responseBody = $this->addWbsChild($row['name'], 0, $row['unit'], $row['currency'], $row['qty'], $row['price'], $row['startdate'], $row['enddate'], $parentID, $this->contractorID, $this->projectID, $this->createdByID, 1);
+                $responseBody = $this->addWbsChild($row['name'], 0, $row['unit'], $row['currency'], $row['qty'], $row['price'], $this->transformDate($row['startdate']), $this->transformDate($row['enddate']), $parentID, $this->contractorID, $this->projectID, $this->createdByID, 1);
             }else{
                 $url = "/api/InsertDataWbs";
                 $sendData['itemName'] = $row['name'];
