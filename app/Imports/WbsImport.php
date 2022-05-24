@@ -29,13 +29,7 @@ class WbsImport implements ToCollection, WithHeadingRow
             $row['no'] = (string)$row['no'];
             //check if no > 1
             if(strlen($row['no']) > 1){
-                $parentLevel = (strlen($row['no']) <= 3 ? 0:1);
-                $childLevel = (strlen($row['no']) <= 3 ? 1:2);
-                $parentFixID = (strlen($row['no']) <= 3 ? $parentID:$parentChildID);
-                $responseBody = $this->addWbsChild($row['name'], $parentLevel, $row['unit'], $row['currency'], $row['qty'], $row['price'], $row['startdate'], $row['enddate'], $parentFixID, $this->contractorID, $this->projectID, $this->createdByID, $childLevel);
-                if(strlen($row['no']) <= 3){
-                    $parentChildID = $responseBody->last_insert_id;
-                }
+                $responseBody = $this->addWbsChild($row['name'], 0, $row['unit'], $row['currency'], $row['qty'], $row['price'], $row['startdate'], $row['enddate'], $parentID, $this->contractorID, $this->projectID, $this->createdByID, 1);
             }else{
                 $url = "/api/InsertDataWbs";
                 $sendData['itemName'] = $row['name'];
