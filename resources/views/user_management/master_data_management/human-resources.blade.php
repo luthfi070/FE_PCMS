@@ -455,7 +455,7 @@
                     errorAlert('Add', $('#PersonilName').val(), 'error');
                     $('#formAddPersonil')[0].reset();
                 }
-                $('#btn-submit-add').html('<i class="fa fa-upload"></i> Import');
+                $('#btn-submit-add').html('<i class="fa fa-save"></i> Save');
                 $('#btn-submit-add').prop("disabled", false);
                 $('#formmodal').modal('toggle');
             });
