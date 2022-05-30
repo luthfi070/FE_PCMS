@@ -810,6 +810,8 @@
                 success: function (res){
                     successAlert('Import','Wbs','success');
                     $('#example').DataTable().ajax.reload();
+                    $('#btn-import-wbs').html('<i class="fa fa-upload"></i> Import');
+                    $('#btn-import-wbs').prop("disabled", false);
                     $('#importWbsModal').modal('toggle');
                 },
                 error: function (e) {

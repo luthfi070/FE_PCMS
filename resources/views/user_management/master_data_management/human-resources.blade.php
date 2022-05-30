@@ -439,6 +439,8 @@
 
         $('#btn-submit-add').click(function(e) {
             e.preventDefault;
+            $('#btn-submit-add').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span> Loading...');
+            $('#btn-submit-add').prop("disabled", true);
             $.ajax({
                 type: "POST",
                 url: '/addHumanResources',
@@ -453,6 +455,8 @@
                     errorAlert('Add', $('#PersonilName').val(), 'error');
                     $('#formAddPersonil')[0].reset();
                 }
+                $('#btn-submit-add').html('<i class="fa fa-upload"></i> Import');
+                $('#btn-submit-add').prop("disabled", false);
                 $('#formmodal').modal('toggle');
             });
 
