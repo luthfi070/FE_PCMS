@@ -85,10 +85,10 @@ class AuthController extends Controller
     //================================================================================================================
 
 
-    public function CheckAuth()
+    public function CheckAuth(Request $request)
     {
-        $username = $_POST['InputUsername'];
-        $pass = $_POST['InputPassword'];
+        $username = $request->InputUsername;
+        $pass = $request->InputPassword;
         $url = "/api/getUser";
         $sendData['UserLogin'] = $username;
         $sendData['password'] = $pass;

@@ -3,7 +3,9 @@
 namespace App\Imports;
 
 use App\Http\Controllers\BaselineWbsController;
+use App\Http\Controllers\CurrentWbsController;
 use App\Http\Controllers\MasterDataController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -38,16 +40,52 @@ class WbsImport implements ToCollection, WithHeadingRow
     public function collection(Collection $collection)
     {
         $baselineWbsController = new BaselineWbsController;
+        $currentWbsController = new CurrentWbsController;
+        $masterDataController = new MasterDataController;
         $parentID=null;
+        $parentIDCurrent=null;
         $parentChildID=null;
         foreach($collection as $row){
             //conver number to string
             $row['no'] = (string)$row['no'];
             //check if no > 1
             if(strlen($row['no']) > 1){
-                $responseBody = $this->addWbsChild($row['name'], 0, $row['unit'], $row['currency'], $row['qty'], $row['price'], $this->transformDate($row['startdate']), $this->transformDate($row['enddate']), $parentID, $this->contractorID, $this->projectID, $this->createdByID, 1);
+                // find Unit ID
+                $unitData = $masterDataController->getOrInsertUnitBySymbol($row['unit']);
+                $unitID = $unitData->id;
+
+                // find Currency ID
+                $currencyData = $masterDataController->getOrInsertCurrencyByName($row['currency']);
+                $currencyID = $currencyData->id;
+
+                $startDate = $this->transformDate($row['startdate']);
+                $endDate = $this->transformDate($row['enddate']);
+
+                $responseBody = $this->addWbsChild($row['name'], 0, $unitID, $currencyID, $row['qty'], $row['price'], $startDate, $endDate, $parentID, $this->contractorID, $this->projectID, $this->createdByID, 1);
+                $requestWbsCurrentChild = new Request([
+                    'childItem' => $row['name'],
+                    'childLevel' => 1,
+                    'parentLvl' => 0,
+                    'unitTypechild' => $unitID,
+                    'childQty' => $row['qty'],
+                    'currencyTypechild' => $currencyID,
+                    'childAmount' => $row['price'],
+                    'parentID' => $parentIDCurrent,
+                    'contractorID' => $this->contractorID,
+                    'startDate' => $startDate,
+                    'endDate' => $endDate,
+
+                ]);
+                $responseBodyCurrentChild = $currentWbsController->addCurrentWbsChild($requestWbsCurrentChild);
             }else{
+
                 $url = "/api/InsertDataWbs";
+                $requestWbsCurrentParent = new Request([
+                        'parentItem' => $row['name'],
+                        'parentLevel' => 0,
+                        'contractorID' => $this->contractorID
+                    ]);
+               
                 $sendData['itemName'] = $row['name'];
                 $sendData['Created_By'] = $this->createdByID;
                 $sendData['level'] = 0;
@@ -55,24 +93,17 @@ class WbsImport implements ToCollection, WithHeadingRow
                 $sendData['ProjectID'] = $this->projectID;
                 $sendData['contractorID'] = $this->contractorID;
                 $responseBody = json_decode($baselineWbsController->insertData($url, $sendData));
+                $responseBodyCurrent = json_decode($currentWbsController->addCurrentWbsParent($requestWbsCurrentParent));
                 $parentID = $responseBody->last_insert_id;
+                $parentIDCurrent = $responseBodyCurrent->last_insert_id;
             }
         }
     }
 
-    public function addWbsChild($name, $parentlevel, $unit, $currency, $qty, $price, $startDate, $endDate, $parentID, $contractorID, $ProjectID, $createdByID, $childLevel){
+    public function addWbsChild($name, $parentlevel, $unitID, $currencyID, $qty, $price, $startDate, $endDate, $parentID, $contractorID, $ProjectID, $createdByID, $childLevel){
         $baselineWbsController = new BaselineWbsController;
-        $masterDataController = new MasterDataController;
         $level = $childLevel;
 
-        // find Unit ID
-        $unitData = $masterDataController->getOrInsertUnitBySymbol($unit);
-        $unitID = $unitData->id;
-
-        // find Currency ID
-        $currencyData = $masterDataController->getOrInsertCurrencyByName($currency);
-        $currencyID = $currencyData->id;
-       
         $childQty = $qty;
         $childAmount = $price;
         $AllWeight = 0;

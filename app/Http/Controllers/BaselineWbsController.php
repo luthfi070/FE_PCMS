@@ -396,12 +396,12 @@ class BaselineWbsController extends Controller
         return  $responseBody;
     }
 
-    public function addWbsParent()
+    public function addWbsParent(Request $request)
     {
 
-        $name = $_POST['parentItem'];
-        $level = $_POST['parentLevel'];
-        $contractorID = $_POST['contractorID'];
+        $name = $request->parentItem;
+        $level = $request->parentLevel;
+        $contractorID = $request->contractorID;
         $url = "/api/InsertDataWbs";
         $sendData['itemName'] = $name;
         $sendData['Created_By'] = session('UserID');

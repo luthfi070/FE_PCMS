@@ -560,12 +560,12 @@ class CurrentWbsController extends Controller
         return  $responseBody;
     }
 
-    public function addCurrentWbsParent()
+    public function addCurrentWbsParent(Request $request)
     {
 
-        $name = $_POST['parentItem'];
-        $level = $_POST['parentLevel'];
-        $contractorID = $_POST['contractorID'];
+        $name = $request->parentItem;
+        $level = $request->parentLevel;
+        $contractorID = $request->contractorID;
         $url = "/api/InsertDataCurrentWbs";
         $sendData['itemName'] = $name;
         $sendData['Created_By'] = session('UserID');
@@ -578,28 +578,31 @@ class CurrentWbsController extends Controller
         return  $responseBody;
     }
 
-    public function addCurrentWbsChild()
+    public function addCurrentWbsChild(Request $request)
     {
-        $name = $_POST['childItem'];
-        $level = $_POST['childLevel'];
-        $parentlevel = $_POST['parentLvl'];
-        $unitTypechild = $_POST['unitTypechild'];
-        $childQty = $_POST['childQty'];
-        $currencyTypechild = $_POST['currencyTypechild'];
-        $childAmount = $_POST['childAmount'];
-        $parentID = $_POST['parentID'];
+        $name = $request->childItem;
+        $level = $request->childLevel;
+        $parentlevel = $request->parentLvl;
+        $unitTypechild = $request->unitTypechild;
+        $childQty = $request->childQty;
+        $currencyTypechild = $request->currencyTypechild;
+        $childAmount = $request->childAmount;
+        $parentID = $request->parentID;
+        $startDate = $request->startDate;
+        $endDate = $request->endDate;
         $AllWeight = 0;
         $parentWeight = 0;
 
-        $contractorID = $_POST['contractorID'];
+        $contractorID = $request->contractorID;
         $ProjectID = session('ProjectID');
         $urlWeight = "/api/getWeightCurrentWbs/" . $ProjectID . '/' . $contractorID;
         $responseBodyWeight = json_decode($this->getData($urlWeight));
         if ($responseBodyWeight != null) {
             $AllWeight = $responseBodyWeight[0]->All_TOTAL;
+            $weight = (($childQty * $childAmount) / $AllWeight) * 100;
+        }else{
+            $weight = 100;
         }
-
-        $weight = round((($childQty * $childAmount) / $AllWeight) * 100,2);
 
 
         $url = "/api/InsertDataCurrentWbs";
@@ -611,6 +614,8 @@ class CurrentWbsController extends Controller
         $sendData['price'] = $childAmount;
         $sendData['amount'] =  $childQty * $childAmount;
         $sendData['weight'] = $weight;
+        $sendData['startDate'] = $startDate;
+        $sendData['endDate'] = $endDate;
         $sendData['ProjectID'] = $ProjectID;
         $sendData['unitID'] = $unitTypechild;
         $sendData['contractorID'] = $contractorID;
