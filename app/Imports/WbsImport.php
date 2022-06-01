@@ -48,8 +48,9 @@ class WbsImport implements ToCollection, WithHeadingRow
         foreach($collection as $row){
             //conver number to string
             $row['no'] = (string)$row['no'];
+            $no = explode('.',$row['no']);
             //check if no > 1
-            if(strlen($row['no']) > 1){
+            if(count($no) > 1){
                 // find Unit ID
                 $unitData = $masterDataController->getOrInsertUnitBySymbol($row['unit']);
                 $unitID = $unitData->id;

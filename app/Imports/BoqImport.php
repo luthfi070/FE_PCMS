@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Http\Controllers\BoqController;
 use App\Http\Controllers\MasterDataController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
@@ -26,8 +27,9 @@ class BoqImport implements ToCollection, WithHeadingRow
         foreach($collection as $row){
             //conver number to string
             $row['no'] = (string)$row['no'];
+            $no = explode('.',$row['no']);
             //check if no > 1
-            if(strlen($row['no']) > 1){
+            if(count($no) > 1){
                 $this->addBoqChild($row['name'], 0, $row['unit'], $row['currency'], $row['qty'], $row['price'], $parentID, $this->contractorID, $this->projectID, $this->createdByID);
             }else{
                 $url = "/api/InsertDataBoq";
@@ -95,22 +97,6 @@ class BoqImport implements ToCollection, WithHeadingRow
             $sendData2['hasChild'] = 'Y';
             $responseBody = $boqController->updateData($url, $sendData2);
 
-            $urlWeight = "/api/getWeightBoq/" . $ProjectID . '/' . $contractorID;
-            $responseBodyWeight = json_decode($boqController->getData($urlWeight));
-            if ($responseBodyWeight != null) {
-                for ($i = 0; $i < count($responseBodyWeight); $i++) {
-                    $url = "/api/UpdateBoq/" . $responseBodyWeight[$i]->parentID;
-                    $sendDataWeight['weight'] = $responseBodyWeight[$i]->ParentWeight;
-                    $boqController->updateData($url, $sendDataWeight);
-                    $url = "/api/DataBoqchild/" . $responseBodyWeight[$i]->parentID;
-                    $responseBodyChild = json_decode($boqController->getData($url));
-                    for ($j = 0; $j < count($responseBodyChild); $j++) {
-                        $url = "/api/UpdateBoq/" . $responseBodyChild[$j]->id;
-                        $sendDataWeight['weight'] = ($responseBodyChild[$j]->amount / $responseBodyWeight[$i]->All_TOTAL)*100;
-                        $boqController->updateData($url, $sendDataWeight);
-                    }
-                }
-            }
             return  $responseBody;
         } else {
             return  json_encode($responseBody);

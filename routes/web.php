@@ -352,6 +352,7 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::post('/getBoqHistoryDetail', ['as' => 'getBoqHistoryDetail', 'uses' => 'BoqController@getBoqHistoryDetail']);
         Route::post('/getBoqchild', ['as' => 'getBoqchild', 'uses' => 'BoqController@getBoqchild']);
         Route::post('/importBoq', ['as' => 'importBoq', 'uses' => 'BoqController@importBoq']);
+        Route::post('/recalculateWeightBoq', ['as' => 'recalculateWeightBoq', 'uses'=> 'BoqController@recalculateWeightBoq']);
 
 
         Route::post('/addActualWbsParent', ['as' => 'addActualWbsParent', 'uses' => 'WbsController@addActualWbsParent']);

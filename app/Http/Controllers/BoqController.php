@@ -577,6 +577,19 @@ class BoqController extends Controller
         return 'success';
     }
 
+    public function recalculateWeightBoq(Request $request)
+    {
+        $projectID = session('ProjectID');
+        $contractorID = $request->contractorID;
+        $url = "/api/recalculateWeightBoq/{$projectID}/{$contractorID}";
+        $url = config('global.api_url') . "" . $url;
+        $client = new Client();
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
+        return 'success';
+    }
+
     //=============================================================================================================================================================================================================
     //=============================================================================================================================================================================================================
 
