@@ -596,6 +596,8 @@
         });
 
         $('#Consultant').on('change', function () {
+            $('#ProjectManagerConsultant').val(null).trigger('change');
+            $('#PositionConsultant').val(null).trigger('change');
             $('#ProjectManagerConsultant').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -624,6 +626,7 @@
         });
 
         $('#ProjectManagerConsultant').on('change', function () {
+            $('#PositionConsultant').val(null).trigger('change');
             $('#PositionConsultant').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -677,6 +680,8 @@
         });
 
         $('#Contractor').on('change', function () {
+            $('#ProjectManagerContractor').val(null).trigger('change');
+            $('#PositionContractor').val(null).trigger('change');
             $('#ProjectManagerContractor').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -705,6 +710,7 @@
         });
 
         $('#ProjectManagerContractor').on('change', function () {
+            $('#PositionContractor').val(null).trigger('change');
             $('#PositionContractor').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -760,6 +766,7 @@
         });
 
         $('#ProjectOwner').on('change', function () {
+            $('#ProjectManagerOwner').val(null).trigger('change');
             $('#ProjectManagerOwner').select2({
                 //dropdownParent: $('#formmodalEdit'),
                 ajax: {
@@ -792,8 +799,8 @@
         $("#btn_submit_consultant").click(function () {
             let ContractNumberConsultant = $('#ContractNumberConsultant').val()
             let Consultant = $('#Consultant').val()
-            let ConsultantText = $('#Consultant').text()
-            let ProjectManagerConsultant = $('#ProjectManagerConsultant').text()
+            let ConsultantText = $('#Consultant').select2('data')[0].text
+            let ProjectManagerConsultant = $('#ProjectManagerConsultant').select2('data')[0].text
             let PositionConsultant = $('#PositionConsultant').val()
             let ScopeOfWorkConsultant = $('#ScopeOfWorkConsultant').val()
             let StartConsultant = $('#StartConsultant').val()
@@ -840,8 +847,8 @@
         $("#btn_submit_contractor").click(function () {
             let ContractNumberContractor = $('#ContractNumberContractor').val()
             let Contractor = $('#Contractor').val()
-            let ContractorText = $('#Contractor').text()
-            let ProjectManagerContractor = $('#ProjectManagerContractor').text()
+            let ContractorText = $('#Contractor').select2('data')[0].text
+            let ProjectManagerContractor = $('#ProjectManagerContractor').select2('data')[0].text
             let PositionContractor = $('#PositionContractor').val()
             let ScopeOfWorkContractor = $('#ScopeOfWorkContractor').val()
             let StartContractor = $('#StartContractor').val()
