@@ -950,7 +950,7 @@
             $("#card-table").show();
             $("#card-table-reschedule").hide();
         });
-        
+
         $('#btn-recalculate-weight').click(function(e) {
             e.preventDefault;
             $('#btn-recalculate-weight').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span> Loading...');
@@ -964,7 +964,7 @@
                 cache: false,
                 data: formData,
                 enctype: "multipart/form-data",
-                url: '/recalculateWeightWbs',
+                url: '/recalculateWeightCurrentWbs',
                 success: function (res){
                     successAlert('Re-Calculate Weight','Wbs','success');
                     $('#example').DataTable().ajax.reload();
