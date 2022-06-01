@@ -426,6 +426,7 @@
                 className: 'btn-primary1',
                 action: function (e, dt, button, config) {
                     $('#formmodal').modal('toggle');
+                    generateContractNumber();
                 }
             }]
         });
@@ -490,7 +491,7 @@
             }
         });
 
-        $('.btn-primary1').on('click', function () {
+        function generateContractNumber() {
             // var id = $(this).data("id");
             $.ajax({
                 type: "POST",
@@ -507,7 +508,7 @@
                 $('#ContractNumberConsultant').val(msg);
 
             });
-        });
+        };
 
         var ArrayConsultant = [];
         var ArrayContractor = [];
@@ -694,7 +695,6 @@
                     processResults: function (data) {
 
                         datob = JSON.parse(data);
-                        console.log(datob)
                         return {
                             results: $.map(datob, function (item) {
                                 return {
@@ -723,8 +723,6 @@
                     processResults: function (data) {
 
                         datob = JSON.parse(data);
-                        console.log("posisi")
-                        console.log(datob)
                         return {
 
                             results: $.map(datob, function (item) {
@@ -816,7 +814,7 @@
             ArrayConsultant.push(EndConsultant)
             ArrayConsultant.push(ContractAmountConsultant)
             ArrayConsultant.push(ConsultantText)
-
+            console.log(ArrayConsultant)
             let row = `<tr>
                         <td>${ConsultantText}</td>
                         <td>${ProjectManagerConsultant}</td>
@@ -840,7 +838,7 @@
         })
 
         $('#consultant tbody').on("click", ".deleteConsultant", function () {
-            console.log($(this).parent());
+            var table = $('#consultant').DataTable();
             table.row($(this).parents('tr')).remove().draw(false);
         });
 
@@ -875,7 +873,7 @@
             //$('#tbodycontractor').append(row)
             var table = $('#contractor').DataTable();
             var action =
-                "<button type='button' class='deleteConsultant btn btn-danger waves-effect waves-light '>Delete</button>"
+                "<button type='button' class='deleteContractor btn btn-danger waves-effect waves-light '>Delete</button>"
             table.row.add([
                 ContractorText,
                 ProjectManagerContractor,
@@ -886,7 +884,12 @@
             ]).draw(false);
 
             $('#ContractorForm').modal('hide')
-        })
+        });
+
+        $('#contractor tbody').on("click", ".deleteContractor", function () {
+            var table = $('#contractor').DataTable();
+            table.row($(this).parents('tr')).remove().draw(false);
+        });
 
 
 
