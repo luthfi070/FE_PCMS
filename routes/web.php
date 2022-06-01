@@ -414,6 +414,7 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::post('/updateCurrentWbsParent', ['as' => 'updateCurrentWbsParent', 'uses' => 'CurrentWbsController@updateCurrentWbsParent']);
         Route::post('/updateCurrentWbsChild', ['as' => 'updateCurrentWbsChild', 'uses' => 'CurrentWbsController@updateCurrentWbsChild']);
         Route::post('/deleteCurrentWbs', ['as' => 'deleteCurrentWbs', 'uses' => 'CurrentWbsController@deleteCurrentWbs']);
+        Route::post('/importCurrentWbs', ['as' => 'importCurrentWbs', 'uses'=> 'CurrentWbsController@importCurrentWbs']);
         Route::post('/recalculateWeightCurrentWbs', ['as' => 'recalculateWeightCurrentWbs', 'uses'=> 'CurrentWbsController@recalculateWeightCurrentWbs']);
 
         Route::get('/profile-group', function () {

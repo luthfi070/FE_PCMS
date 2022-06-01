@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\CurrentWbsImport;
 use DateTime;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CurrentWbsController extends Controller
 {
@@ -644,6 +646,16 @@ class CurrentWbsController extends Controller
         } else {
             return  json_encode($responseBody);
         }
+    }
+
+    public function importCurrentWbs(Request $request)
+    {
+        ini_set('max_execution_time', 0);
+        $projectID = session('ProjectID');
+        $contractorID = $request->contractorID;
+        $createdByID = session('UserID');
+        Excel::import(new CurrentWbsImport($projectID, $contractorID, $createdByID), $request->file('fileExcel'));
+        return 'success';
     }
 
     public function rescheduleCurrentWbs()

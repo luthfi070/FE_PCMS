@@ -244,6 +244,38 @@
         </div>
     </div>
 
+    <div class="modal fade" id="importWbsModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated fadeInUp">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title_child">Import Wbs</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formImportWbs">
+                        <input type="hidden" class="form-control" id="contractorIDForWbs" name="contractorID" required>
+                        <div class="form-group row">
+                            <label for="input-21" class="col-sm-2 col-form-label">File Excel</label>
+                            <div class="col-sm-10">
+                                {{-- input file excel --}}
+                                <input type="file" class="form-control" id="fileExcel" name="fileExcel" placeholder="Masukkan File Excel" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group float-right">
+
+                        <button type="submit" class="btn btn-success px-5" id="btn-import-wbs"><i class="fa fa-upload"></i> Import</button>
+                        <button type="reset" class="btn btn-danger px-5" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i> Cancel</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="recalculateWeightWbs">
         <div class="modal-dialog modal-lg">
             <div class="modal-content animated fadeInUp">
@@ -265,6 +297,8 @@
             </div>
         </div>
     </div>
+
+
 </div>
 @endsection
 @section('script')
@@ -337,10 +371,10 @@
                 // , {
                 //     extend: 'print'
                 // },
-                {
-                    text: 'Import WBS Source',
-                    className: 'btn-secondary'
-                },
+                // {
+                //     text: 'Import WBS Source',
+                //     className: 'btn-secondary'
+                // },
                 // {
                 //     text: 'Gantt Chart',
                 //     className: 'btn-secondary',
@@ -981,6 +1015,37 @@
             });
         });
 
+        $('#btn-import-wbs').click(function(e) {
+            e.preventDefault;
+            $('#btn-import-wbs').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span> Loading...');
+            $('#btn-import-wbs').prop("disabled", true);
+            var formData = new FormData();
+            formData.append('contractorID', $('#contractor-list').val());
+            formData.append('fileExcel', $('#fileExcel')[0].files[0]);
+            $.ajax({
+                method: "POST",
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: formData,
+                enctype: "multipart/form-data",
+                url: '/importCurrentWbs',
+                success: function (res){
+                    successAlert('Import','Wbs','success');
+                    $('#example').DataTable().ajax.reload();
+                    $('#btn-import-wbs').html('<i class="fa fa-upload"></i> Import');
+                    $('#btn-import-wbs').prop("disabled", false);
+                    $('#importWbsModal').modal('toggle');
+                },
+                error: function (e) {
+                    console.log(e);
+                    errorAlert('Import','Wbs','failed');
+                    $('#btn-import-wbs').html('<i class="fa fa-upload"></i> Import');
+                    $('#btn-import-wbs').prop("disabled", false);
+                }
+            });
+        });
+
         $('#contractor-list').on('change', function() {
             $("#card-table").show();
             $("#card-scurve").hide();
@@ -1014,8 +1079,11 @@
                         }
                     },
                     {
-                        text: 'Import WBS Source',
-                        className: 'btn-secondary'
+                        text: 'Import Excel',
+                        className: 'btn-secondary',
+                        action: function(e, dt, button, config) {
+                            $('#importWbsModal').modal();
+                        }
                     },
                     {
                         text: 'Gantt Chart',
@@ -1279,10 +1347,6 @@
                         exportOptions: {
                             columns: [0, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
                         }
-                    },
-                    {
-                        text: 'Import WBS Source',
-                        className: 'btn-secondary'
                     },
                     {
                         text: 'Gantt Chart',
