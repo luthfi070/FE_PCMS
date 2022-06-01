@@ -393,6 +393,7 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::post('/updateWbsChild', ['as' => 'updateWbsChild', 'uses' => 'BaselineWbsController@updateWbsChild']);
         Route::post('/deleteWbs', ['as' => 'deleteWbs', 'uses' => 'BaselineWbsController@deleteWbs']);
         Route::post('/importBaselineWbs', ['as' => 'importBaselineWbs', 'uses'=> 'BaselineWbsController@importBaselineWbs']);
+        Route::post('/recalculateWeightWbs', ['as' => 'recalculateWeightWbs', 'uses'=> 'BaselineWbsController@recalculateWeightWbs']);
 
         Route::post('/addCurrentWbsParent', ['as' => 'addCurrentWbsParent', 'uses' => 'CurrentWbsController@addCurrentWbsParent']);
         Route::post('/addCurrentWbsChild', ['as' => 'addCurrentWbsChild', 'uses' => 'CurrentWbsController@addCurrentWbsChild']);
@@ -412,6 +413,7 @@ Route::middleware(['verify_auth'])->group(function () {
         Route::post('/updateCurrentWbsParent', ['as' => 'updateCurrentWbsParent', 'uses' => 'CurrentWbsController@updateCurrentWbsParent']);
         Route::post('/updateCurrentWbsChild', ['as' => 'updateCurrentWbsChild', 'uses' => 'CurrentWbsController@updateCurrentWbsChild']);
         Route::post('/deleteCurrentWbs', ['as' => 'deleteCurrentWbs', 'uses' => 'CurrentWbsController@deleteCurrentWbs']);
+        Route::post('/recalculateWeightCurrentWbs', ['as' => 'recalculateWeightCurrentWbs', 'uses'=> 'CurrentWbsController@recalculateWeightCurrentWbs']);
 
         Route::get('/profile-group', function () {
             return view('user_management/user_management/profile-group');

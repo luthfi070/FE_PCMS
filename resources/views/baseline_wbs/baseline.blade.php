@@ -236,6 +236,28 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="recalculateWeightWbs">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated fadeInUp">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title_child">Re-Calculate Weight Wbs</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group float-right">
+
+                        <button type="submit" class="btn btn-success px-5" id="btn-recalculate-weight">Re-Calculate Weight Wbs</button>
+                        <button type="reset" class="btn btn-danger px-5" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i> Cancel</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
 @section('script')
@@ -822,6 +844,37 @@
                 }
             });
         });
+        
+        $('#btn-recalculate-weight').click(function(e) {
+            e.preventDefault;
+            $('#btn-recalculate-weight').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="sr-only">Loading...</span> Loading...');
+            $('#btn-recalculate-weight').prop("disabled", true);
+            var formData = new FormData();
+            formData.append('contractorID', $('#contractor-list').val());
+            $.ajax({
+                method: "POST",
+                processData: false,
+                contentType: false,
+                cache: false,
+                data: formData,
+                enctype: "multipart/form-data",
+                url: '/recalculateWeightWbs',
+                success: function (res){
+                    successAlert('Re-Calculate Weight','Wbs','success');
+                    $('#example').DataTable().ajax.reload();
+                    $('#btn-recalculate-weight').html('Re-Calculate Weight Wbs');
+                    $('#btn-recalculate-weight').prop("disabled", false);
+                    $('#recalculateWeightWbs').modal('toggle');
+                },
+                error: function (e) {
+                    console.log(e);
+                    errorAlert('Re-Calculate Weight','Wbs','failed');
+                    $('#btn-recalculate-weight').html('Re-Calculate Weight Wbs');
+                    $('#btn-recalculate-weight').prop("disabled", false);
+                }
+            });
+        });
+
 
         $('#example tbody').on('click', '.confirm-btn-alert', function() {
             id = $(this).attr('data-ids');
@@ -992,6 +1045,13 @@
 
                             });
 
+                        }
+                    },
+                    {
+                        text: 'Re-Calculate Weight',
+                        className: 'btn-secondary',
+                        action: function(e, dt, button, config) {
+                            $('#recalculateWeightWbs').modal();
                         }
                     }
                 ],

@@ -83,7 +83,7 @@ class BaselineWbsController extends Controller
         $arr = array();
         $totalDuration = array();
         for ($i = 0; $i < count($responseBody); $i++) {
-            $responseBody[$i]->weight=round($responseBody[$i]->weight,2);
+            $responseBody[$i]->weight=round($responseBody[$i]->weight,4);
             $responseBody[$i]->action = ' <button type="button" class="btn-form-child btn btn-info  waves-effect waves-light m-1" data-lvl="' . $responseBody[$i]->parentLevel . '" data-id="' . $responseBody[$i]->id . '">Add Child Item</button>
             <button class="edit-btn-parent btn btn-warning  waves-effect waves-light m-1" data-id="' . $responseBody[$i]->id . '">EDIT</button>
             <button type="button" class="btn btn-danger confirm-btn-alert waves-effect waves-light m-1" data-ids="' . $responseBody[$i]->id . '">DELETE</button>';
@@ -593,6 +593,19 @@ class BaselineWbsController extends Controller
         $contractorID = $request->contractorID;
         $createdByID = session('UserID');
         Excel::import(new WbsImport($projectID, $contractorID, $createdByID), $request->file('fileExcel'));
+        return 'success';
+    }
+
+    public function recalculateWeightWbs(Request $request)
+    {
+        $projectID = session('ProjectID');
+        $contractorID = $request->contractorID;
+        $url = "/api/recalculateWeightWbs/{$projectID}/{$contractorID}";
+        $url = config('global.api_url') . "" . $url;
+        $client = new Client();
+        $response = $client->request('GET', $url, [
+            'verify'  => false,
+        ]);
         return 'success';
     }
 
