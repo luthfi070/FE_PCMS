@@ -1040,7 +1040,7 @@
                                     gridTextColor: "#ddd",
                                     resize: true,
                                     parseTime: false,
-                                    smooth: true,
+                                    smooth: false,
                                 });
 
                             });
