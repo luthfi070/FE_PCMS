@@ -1,7 +1,7 @@
 <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
   <div class="brand-logo">
     <a href="index.html">
-      <img src="{{url('assets/images/logo-icon.png')}}" class="logo-icon" alt="logo icon">
+      <img src="{{url('assets/images/logo-pupr.png')}}" class="logo-icon" alt="logo icon">
       <h5 class="logo-text">Cost Management</h5>
     </a>
   </div>
