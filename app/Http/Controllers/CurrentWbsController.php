@@ -777,8 +777,10 @@ class CurrentWbsController extends Controller
         }else{
             $url = "/api/getBaselineChart/" . $projectID . "/" . $contractorID;
         }
+
+        dd($url);
         
-        $responseBody = $this->getData($url);
+        // $responseBody = $this->getData($url);
         return  $responseBody;
     }
 

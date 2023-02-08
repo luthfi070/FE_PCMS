@@ -55,7 +55,7 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     'asset_url' => env('ASSET_URL', null),
-    'api_url'=> 'localhost:8001',
+    'api_url'=> 'https://bepcms-production.up.railway.app',
 
     /*
     |--------------------------------------------------------------------------

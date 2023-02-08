@@ -1096,9 +1096,9 @@
                         text: 'S-curve',
                         className: 'btn-secondary',
                         action: function(e, dt, button, config) {
-                            $("#card-scurve").show();
-                            $("#card-table").hide();
-                            $("#card-table-reschedule").hide();
+                            // $("#card-scurve").show();
+                            // $("#card-table").hide();
+                            // $("#card-table-reschedule").hide();
                             $.ajax({
                                 type: "POST",
                                 url: '/getCurrentWbsChart',
@@ -1108,19 +1108,20 @@
                                 },
                                 dataType: "JSON"
                             }).done(function(data) {
-                                $("#bar-chart").empty();
-                                Morris.Line({
-                                    element: 'bar-chart',
-                                    data: data,
-                                    xkey: 'x',
-                                    ykeys: ['baseline', 'actual'],
-                                    labels: ['Baseline', 'Actual'],
-                                    lineColors: ['#03d0ea', '#d13adf', '#fba540'],
-                                    gridTextColor: "#ddd",
-                                    resize: true,
-                                    parseTime: false,
-                                    smooth: false,
-                                });
+                                console.log(data)
+                                // $("#bar-chart").empty();
+                                // Morris.Line({
+                                //     element: 'bar-chart',
+                                //     data: data,
+                                //     xkey: 'x',
+                                //     ykeys: ['baseline', 'actual'],
+                                //     labels: ['Baseline', 'Actual'],
+                                //     lineColors: ['#03d0ea', '#d13adf', '#fba540'],
+                                //     gridTextColor: "#ddd",
+                                //     resize: true,
+                                //     parseTime: false,
+                                //     smooth: false,
+                                // });
 
                             }).fail(function(jqXHR, textStatus, errorThrown) {
                                 errorAlertServer('Response Not Found, Please Check Your Data');
